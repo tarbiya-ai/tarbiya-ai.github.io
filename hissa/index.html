@@ -1,0 +1,750 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>منظومة القيم في منهاج التربية الإسلامية – حصة تكوينية رقمية</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --teal:#176b63; --teal-2:#4f8d86; --teal-soft:#e4f0ee; --teal-line:#9cc2bd;
+  --ink:#1d2b2a; --muted:#5d6e6c; --bg:#f6f8f7; --card:#fff;
+  --ok:#2e7d4f; --ok-soft:#e3f3e9; --bad:#b3412f; --bad-soft:#fbe9e5;
+  --warn:#a86a12; --warn-soft:#fbf1df; --line:#d9e3e1;
+  --r:14px; --shadow:0 2px 10px rgba(23,107,99,.08);
+}
+*{box-sizing:border-box}
+html,body{margin:0;background:var(--bg);color:var(--ink);font-family:"Tajawal","Noto Naskh Arabic","Segoe UI",Tahoma,sans-serif;font-size:17px;line-height:1.7}
+button{font:inherit;cursor:pointer}
+textarea,input{font:inherit}
+.hidden{display:none!important}
+
+/* header */
+header.top{position:sticky;top:0;z-index:30;background:var(--teal);color:#fff;box-shadow:0 2px 8px rgba(0,0,0,.12)}
+.top-in{max-width:1280px;margin:auto;display:flex;align-items:center;gap:14px;padding:10px 18px;flex-wrap:wrap}
+.brand{display:flex;flex-direction:column;line-height:1.3}
+.brand b{font-size:19px}
+.brand small{opacity:.8;font-size:13px}
+.steps{display:flex;gap:6px;margin-inline-start:auto;flex-wrap:wrap}
+.steps button{background:rgba(255,255,255,.12);color:#fff;border:1px solid rgba(255,255,255,.25);border-radius:999px;padding:6px 14px;font-size:14px;display:flex;gap:8px;align-items:center}
+.steps button .t{opacity:.75;font-size:12px;direction:ltr}
+.steps button.on{background:#fff;color:var(--teal);font-weight:700}
+.clock{direction:ltr;font-variant-numeric:tabular-nums;background:rgba(0,0,0,.18);padding:5px 12px;border-radius:8px;font-weight:700}
+.tbtn{background:#fff;color:var(--teal);border:0;border-radius:8px;padding:7px 14px;font-weight:700}
+
+main{max-width:1280px;margin:auto;padding:22px 18px 80px}
+.stage-head{display:flex;align-items:baseline;gap:14px;border-bottom:1px solid var(--line);padding-bottom:10px;margin-bottom:18px;flex-wrap:wrap}
+.stage-head h1{margin:0;font-size:28px;color:var(--teal)}
+.stage-head .sub{color:var(--muted);font-size:15px}
+.box{background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:18px 20px;box-shadow:var(--shadow);margin-bottom:18px}
+.box h2{margin:0 0 10px;font-size:20px;color:var(--teal);background:var(--teal-soft);margin:-18px -20px 14px;padding:10px 20px;border-radius:var(--r) var(--r) 0 0}
+.btn{background:var(--teal);color:#fff;border:0;border-radius:10px;padding:9px 18px;font-weight:700}
+.btn:hover{filter:brightness(1.08)}
+.btn.ghost{background:#fff;color:var(--teal);border:1.5px solid var(--teal)}
+.btn.small{padding:6px 12px;font-size:15px}
+.btn:disabled{opacity:.45;cursor:not-allowed}
+.row{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+.note{padding:12px 16px;border-radius:10px;margin-top:12px;font-size:16px}
+.note.info{background:var(--teal-soft);border-inline-start:4px solid var(--teal)}
+.note.ok{background:var(--ok-soft);border-inline-start:4px solid var(--ok)}
+.note.bad{background:var(--bad-soft);border-inline-start:4px solid var(--bad)}
+.note.warn{background:var(--warn-soft);border-inline-start:4px solid var(--warn)}
+.sol{display:none}
+body.solutions .sol{display:block}
+.sol-tag{background:var(--warn-soft);border:1px dashed var(--warn);color:var(--warn);border-radius:10px;padding:8px 12px;margin-top:10px;font-size:15px}
+
+/* ===== Stage 1 player ===== */
+.player{position:relative;background:#0f2523;border-radius:var(--r);overflow:hidden;aspect-ratio:16/9;max-height:62vh;margin:auto}
+.player video{width:100%;height:100%;display:block;background:#000}
+.anim{position:absolute;inset:0}
+.anim svg{width:100%;height:100%;display:block}
+.subs{position:absolute;inset-inline:6%;bottom:13%;text-align:center;pointer-events:none}
+.subs span{display:inline-block;background:rgba(0,0,0,.72);color:#fff;padding:6px 16px;border-radius:8px;font-size:clamp(14px,2.1vw,24px);line-height:1.55;max-width:100%}
+.subs .who{color:#ffd88a;font-weight:700}
+.freeze{position:absolute;inset:0;background:rgba(15,37,35,.78);display:flex;align-items:center;justify-content:center;flex-direction:column;color:#fff;text-align:center;padding:4%;opacity:0;transition:opacity .6s;pointer-events:none}
+.freeze.on{opacity:1}
+.freeze .q{font-size:clamp(18px,2.8vw,34px);font-weight:800;line-height:1.5}
+.freeze .tag{background:#ffd88a;color:#3b2a07;border-radius:6px;padding:2px 10px;font-size:clamp(11px,1.3vw,15px);margin-bottom:12px;font-weight:700}
+.ctrls{display:flex;align-items:center;gap:10px;padding:10px 4px 0}
+.ctrls .bar{flex:1;height:8px;background:var(--line);border-radius:99px;position:relative;cursor:pointer;direction:ltr}
+.ctrls .bar i{position:absolute;inset-block:0;left:0;background:var(--teal);border-radius:99px;width:0}
+.ctrls .bar b{position:absolute;top:-4px;width:3px;height:16px;background:var(--teal-2)}
+.ctrls .tm{direction:ltr;font-variant-numeric:tabular-nums;color:var(--muted);min-width:96px;text-align:center}
+.vcards{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:6px}
+.vcard{border:2px solid var(--line);background:#fff;border-radius:14px;padding:22px 10px;text-align:center;font-size:21px;font-weight:700;color:var(--ink);transition:.15s}
+.vcard:hover{border-color:var(--teal-2)}
+.vcard.on{border-color:var(--teal);background:var(--teal-soft);color:var(--teal)}
+.vcard.on::before{content:"✓ ";}
+
+/* ===== Stage 2 ===== */
+.split{display:grid;grid-template-columns:40fr 60fr;gap:18px;align-items:start}
+.docpane{position:sticky;top:84px}
+.docimg{user-select:none;-webkit-user-select:none;position:relative;border:1px solid var(--line);border-radius:10px;overflow:hidden;background:#fff;cursor:zoom-in}
+.docimg img{width:100%;display:block}
+.docimg .hl{position:absolute;border:3px solid #e08a1e;border-radius:6px;box-shadow:0 0 0 0 rgba(224,138,30,0);background:rgba(255,196,80,.16);pointer-events:none;animation:pulse 1.8s infinite}
+@keyframes pulse{50%{box-shadow:0 0 0 6px rgba(224,138,30,.25)}}
+.cap{font-size:14px;color:var(--muted);margin-top:6px}
+.map-wrap{user-select:none;-webkit-user-select:none;position:relative;direction:ltr;width:100%;max-width:640px;margin:8px auto;aspect-ratio:1.32/1}
+.map-wrap svg.lines{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}
+.node{position:absolute;transform:translate(-50%,-50%);width:27%;min-height:19%;border-radius:16px;display:flex;align-items:center;justify-content:center;flex-direction:column;text-align:center;color:#fff;font-size:clamp(16px,2.1vw,24px);font-weight:700;direction:rtl;padding:6px;transition:opacity .45s, transform .45s, background .2s}
+.node.c{background:var(--teal);width:30%;min-height:21%;cursor:pointer;box-shadow:0 4px 14px rgba(23,107,99,.35)}
+.node.c small{font-size:clamp(11px,1.15vw,14px);font-weight:500;opacity:.9;line-height:1.4}
+.node.v{background:var(--teal-2)}
+.node.off{opacity:0;transform:translate(-50%,-50%) scale(.7)}
+.pos-top{left:50%;top:14%} .pos-bottom{left:50%;top:86%} .pos-left{left:16%;top:50%} .pos-right{left:84%;top:50%} .pos-center{left:50%;top:50%}
+.slot{position:absolute;transform:translate(-50%,-50%);width:27%;min-height:19%;border:2.5px dashed var(--teal-line);border-radius:16px;background:rgba(255,255,255,.7);display:flex;align-items:center;justify-content:center;color:var(--muted);font-size:14px;direction:rtl;text-align:center;padding:4px}
+.slot.c{width:30%;min-height:21%}
+.slot.hover,.slot.armed{border-color:var(--teal);background:var(--teal-soft)}
+.slot.filled{border:0;background:var(--teal-2);color:#fff;font-size:clamp(16px,2.1vw,24px);font-weight:700}
+.slot.c.filled{background:var(--teal)}
+.slot.wrong{animation:shake .4s;border-color:var(--bad);background:var(--bad-soft)}
+@keyframes shake{25%{margin-left:-8px}75%{margin-left:8px}}
+.pool{user-select:none;-webkit-user-select:none;display:flex;gap:10px;justify-content:center;flex-wrap:wrap;min-height:58px;padding:10px;border:1.5px dashed var(--line);border-radius:12px;margin-top:10px}
+.chip{background:#fff;border:2px solid var(--teal-2);color:var(--teal);border-radius:12px;padding:8px 18px;font-weight:700;font-size:18px;touch-action:none;user-select:none;cursor:grab}
+.chip.sel{background:var(--teal);color:#fff}
+.chip.amana{border-color:#e08a1e;color:#9b5a08}
+.chip.amana.sel{background:#e08a1e;color:#fff}
+.dragghost{position:fixed;z-index:999;pointer-events:none;opacity:.9;transform:translate(-50%,-50%) rotate(-3deg);box-shadow:0 8px 20px rgba(0,0,0,.2)}
+
+/* ===== Stage 3 ===== */
+.lesson-card{display:flex;gap:16px;align-items:center;background:linear-gradient(135deg,var(--teal),#23857b);color:#fff;border-radius:var(--r);padding:20px 24px;cursor:pointer;box-shadow:var(--shadow)}
+.lesson-card .ic{font-size:40px}
+.lesson-card b{font-size:23px;display:block}
+.lesson-card small{opacity:.85}
+.opts{display:flex;flex-direction:column;gap:8px}
+.opt{display:flex;gap:10px;align-items:center;text-align:start;background:#fff;border:2px solid var(--line);border-radius:10px;padding:10px 14px;font-size:17px}
+.opt .k{background:var(--teal-soft);color:var(--teal);border-radius:7px;min-width:30px;height:30px;display:flex;align-items:center;justify-content:center;font-weight:800}
+.opt:hover{border-color:var(--teal-2)}
+.opt.on{border-color:var(--teal);background:var(--teal-soft)}
+.opt.ok{border-color:var(--ok);background:var(--ok-soft)}
+.opt.bad{border-color:var(--bad);background:var(--bad-soft)}
+.judg{border:1px solid var(--line);border-radius:12px;padding:14px 16px;margin-bottom:12px;background:#fcfdfd}
+.judg .st{font-size:19px;font-weight:700;margin-bottom:8px}
+.judg .st .n{color:var(--teal);margin-inline-end:6px}
+.seg{display:inline-flex;border:1.5px solid var(--teal);border-radius:10px;overflow:hidden}
+.seg button{background:#fff;color:var(--teal);border:0;padding:6px 16px;font-weight:700}
+.seg button.on{background:var(--teal);color:#fff}
+textarea{width:100%;min-height:70px;border:1.5px solid var(--line);border-radius:10px;padding:8px 12px;resize:vertical;background:#fff}
+textarea:focus,input:focus{outline:2px solid var(--teal-line);border-color:var(--teal)}
+.amana-zone{user-select:none;-webkit-user-select:none;display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin:12px 0}
+.azone{border:2.5px dashed var(--teal-line);border-radius:14px;padding:16px 8px;text-align:center;font-weight:700;font-size:19px;color:var(--teal);min-height:96px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;background:#fff}
+.azone.hover,.azone.armed{background:var(--teal-soft);border-color:var(--teal)}
+.azone.got{border-style:solid;border-color:#e08a1e;background:var(--warn-soft)}
+.azone .chip{cursor:grab;font-size:15px;padding:4px 12px}
+
+/* ===== Stage 4 ===== */
+.q{border-bottom:1px dashed var(--line);padding:6px 0 16px;margin-bottom:12px}
+.q:last-child{border:0}
+.q h3{margin:6px 0 10px;font-size:19px}
+.q h3 .n{background:var(--teal);color:#fff;border-radius:7px;padding:0 9px;margin-inline-end:8px;font-size:16px}
+.opts.inline{flex-direction:row;flex-wrap:wrap}
+.score{font-size:22px;font-weight:800;color:var(--teal)}
+input.name{border:1.5px solid var(--line);border-radius:10px;padding:8px 12px;min-width:260px;background:#fff}
+
+/* modal */
+.modal{position:fixed;inset:0;background:rgba(10,25,24,.82);z-index:100;display:flex;flex-direction:column}
+.modal .mbar{display:flex;gap:8px;align-items:center;padding:10px 16px;color:#fff;flex-wrap:wrap}
+.modal .mbar b{margin-inline-end:auto}
+.modal .mbar .btn{background:#fff;color:var(--teal)}
+.modal .mbody{flex:1;overflow:auto;display:flex;justify-content:center;padding:10px}
+.modal .mimg{position:relative;transform-origin:top center}
+.modal .mimg img{display:block;width:100%}
+
+/* trainer drawer */
+.drawer{position:fixed;top:0;bottom:0;left:0;width:min(440px,94vw);background:#fff;z-index:60;box-shadow:4px 0 24px rgba(0,0,0,.18);transform:translateX(-105%);transition:transform .25s;display:flex;flex-direction:column}
+.drawer.open{transform:none}
+.drawer .dh{background:var(--teal);color:#fff;padding:14px 18px;display:flex;align-items:center}
+.drawer .dh b{flex:1;font-size:19px}
+.drawer .dh button{background:none;border:0;color:#fff;font-size:24px}
+.drawer .db{padding:14px 18px;overflow:auto;flex:1}
+.drawer h4{margin:16px 0 8px;color:var(--teal);font-size:16px;border-bottom:1px solid var(--line);padding-bottom:4px}
+.drawer .grid{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.drawer .grid .btn{font-size:15px;padding:8px 6px}
+.switch{display:flex;align-items:center;gap:10px;font-weight:700;cursor:pointer}
+.switch input{width:20px;height:20px;accent-color:var(--teal)}
+table.res{width:100%;border-collapse:collapse;font-size:14px}
+table.res th,table.res td{border:1px solid var(--line);padding:5px 6px;text-align:start;vertical-align:top}
+table.res th{background:var(--teal-soft)}
+.toast{position:fixed;bottom:22px;left:50%;transform:translateX(-50%);background:var(--ink);color:#fff;padding:10px 22px;border-radius:10px;z-index:200;opacity:0;transition:opacity .3s;pointer-events:none}
+.toast.on{opacity:1}
+footer.f{color:var(--muted);font-size:13px;text-align:center;padding:16px}
+
+@media (max-width:900px){
+  header.top{position:static}
+  .split{grid-template-columns:1fr}
+  .docpane{position:static}
+  .vcards,.amana-zone{grid-template-columns:repeat(2,1fr)}
+  .steps button .t{display:none}
+}
+
+@media (max-width:640px){
+  .ctrls{flex-wrap:wrap}
+  .ctrls .bar{order:3;flex-basis:100%;height:12px}
+  .ctrls .tm{margin-inline-start:auto}
+  .stage-head h1{font-size:23px}
+  .top-in{gap:8px;padding:8px 12px}
+  .brand b{font-size:16px}
+  .steps button{padding:5px 10px;font-size:13px}
+}
+html,body{max-width:100%;overflow-x:hidden}
+@media (min-width:1800px){html{zoom:1.15}}
+@media (min-width:2500px){html{zoom:1.6}}
+@media (min-width:3200px){html{zoom:2}}
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="top-in">
+    <div class="brand"><b>منظومة القيم في منهاج التربية الإسلامية</b><small>حصة تكوينية رقمية مصغرة · 30 دقيقة · بصيرة تكوين</small></div>
+    <nav class="steps" id="steps"></nav>
+    <span class="clock" id="clock" title="زمن الحصة">00:00</span>
+    <button class="tbtn" id="openDrawer">⚙ واجهة الأستاذ المكوّن</button>
+  </div>
+</header>
+
+<main>
+<!-- ============ STAGE 1 ============ -->
+<section class="stage" id="s1" data-i="0">
+  <div class="stage-head"><h1>01 · الوضعية المهنية</h1><span class="sub">00:00 – 05:00 · فيديو الوضعية (60 ثانية) ثم تفاعل</span></div>
+  <div class="box">
+    <h2>شاهد الوضعية</h2>
+    <div class="player" id="player">
+      <video id="vid" class="hidden" playsinline preload="metadata" poster="assets/poster.jpg"><track kind="subtitles" srclang="ar" label="العربية" default></video>
+      <div class="anim" id="anim"></div>
+      <div class="subs" id="subs"></div>
+      <div class="freeze" id="freeze"><div class="tag">لقطة توقف · ورقة التنقيط</div><div class="q">ما القيم التي تتداخل في هذه الوضعية؟<br>وكيف نربطها بمنظومة القيم في المنهاج؟</div></div>
+    </div>
+    <div class="ctrls">
+      <button class="btn small" id="vPlay">▶ تشغيل</button>
+      <button class="btn small ghost" id="vRestart">↺ إعادة</button>
+      <div class="bar" id="vBar"><i></i><b style="left:33.3%"></b><b style="left:66.6%"></b></div>
+      <span class="tm" id="vTime">0:00 / 1:00</span>
+    </div>
+  </div>
+
+  <div class="box" id="afterVideo">
+    <h2>شاشة ما بعد الفيديو</h2>
+    <p style="margin-top:0">اختر القيم التي تثيرها الوضعية (يمكن اختيار أكثر من بطاقة):</p>
+    <div class="vcards" id="vcards"></div>
+    <div class="row" style="margin-top:14px"><button class="btn" id="showProps">عرض المقترحات</button></div>
+    <div class="note info hidden" id="propsNote"></div>
+  </div>
+</section>
+
+<!-- ============ STAGE 2 ============ -->
+<section class="stage hidden" id="s2" data-i="1">
+  <div class="stage-head"><h1>02 · الخريطة التفاعلية الرسمية</h1><span class="sub">05:00 – 15:00 · المرجع: الصفحة المطبوعة 8 من منهاج التربية الإسلامية (2016)</span></div>
+  <div class="split">
+    <div class="docpane">
+      <div class="box">
+        <h2>الوثيقة المرجعية · ص 8</h2>
+        <div class="docimg" data-open="p8"><img src="assets/page8.jpg" alt="الصفحة 8 من منهاج التربية الإسلامية 2016"><div class="hl" style="left:22%;top:50.2%;width:58%;height:19.5%"></div></div>
+        <div class="cap">اضغط على الصورة للتكبير · الإطار البرتقالي يحدد الرسم المرجعي</div>
+      </div>
+    </div>
+    <div>
+      <div class="box">
+        <h2>الخريطة الرقمية</h2>
+        <div class="row" id="mapBtns">
+          <button class="btn small" id="btnReveal">إظهار القيم الناظمة</button>
+          <button class="btn small ghost" id="btnRebuild">أعد بناء الخريطة</button>
+          <button class="btn small ghost" data-open="p8">راجع الوثيقة</button>
+        </div>
+        <div class="map-wrap" id="map"></div>
+        <div class="pool hidden" id="mapPool"></div>
+        <div class="note info hidden" id="mapNote"></div>
+        <div class="note warn" style="font-size:15px">التوحيد هو القيمة المركزية، والقيم الناظمة هي: المحبة، الإحسان، الاستقامة، الحرية. هذه البنية مستمدة من الرسم المرجعي، وأي علاقة إضافية مع الأمانة هي نشاط تحليلي، وليست جزءاً من الرسم الرسمي.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ STAGE 3 ============ -->
+<section class="stage hidden" id="s3" data-i="2">
+  <div class="stage-head"><h1>03 · الربط بالدرس وورشة التصحيح</h1><span class="sub">15:00 – 25:00 · نشاط تحليل ديداكتيكي · برنامج الأولى باكالوريا</span></div>
+  <div class="split">
+    <div class="docpane">
+      <div class="lesson-card" data-open="p22">
+        <span class="ic">📘</span>
+        <div><b>حق الله: الوفاء بالأمانة والمسؤولية</b><small>الأولى باكالوريا · مدخل القسط · الأسبوع 6 · اضغط لعرض الصفحة 22</small></div>
+      </div>
+      <div class="box" style="margin-top:14px" id="p22box">
+        <h2>الوثيقة المرجعية · ص 22</h2>
+        <div class="docimg" data-open="p22"><img src="assets/page22.jpg" alt="الصفحة 22 من منهاج التربية الإسلامية 2016"><div class="hl" style="left:19.5%;top:29.4%;width:16.1%;height:2.85%"></div></div>
+        <div class="cap">الإطار البرتقالي: موضع الدرس في عمود «قسط»</div>
+      </div>
+    </div>
+    <div>
+      <div class="box">
+        <h2>سؤال تمهيدي</h2>
+        <p style="margin-top:0;font-weight:700">هل «الأمانة» في هذا الدرس:</p>
+        <div class="opts" id="mcq3"></div>
+        <div class="note hidden" id="mcq3Note"></div>
+      </div>
+      <div class="box">
+        <h2>بطاقات الأحكام الثلاثة</h2>
+        <p style="margin-top:0">لكل بطاقة: اختر «أقبل العلاقة» أو «أراجع العلاقة»، ثم علّل اختيارك وأكّد.</p>
+        <div id="judgs"></div>
+      </div>
+      <div class="box">
+        <h2>اربط بطاقة الأمانة بقيمة ناظمة</h2>
+        <p style="margin-top:0">اسحب بطاقة <b>الأمانة</b> نحو القيمة الناظمة التي تختارها، ثم اكتب تعليلك. (باللمس: المس البطاقة ثم المس القيمة.)</p>
+        <div class="pool" id="amanaPool"></div>
+        <div class="amana-zone" id="amanaZones"></div>
+        <textarea id="amanaWhy" placeholder="علّل الربط الذي اقترحته..."></textarea>
+        <div class="row" style="margin-top:10px"><button class="btn" id="amanaSave">حفظ التعليل</button></div>
+        <div class="note hidden" id="amanaNote"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ STAGE 4 ============ -->
+<section class="stage hidden" id="s4" data-i="3">
+  <div class="stage-head"><h1>04 · التقويم الرقمي والتغذية الراجعة</h1><span class="sub">25:00 – 30:00</span></div>
+  <div class="box">
+    <h2>هوية المتكوّن</h2>
+    <div class="row"><label for="tname">الاسم أو رمز المتكوّن/المجموعة:</label><input class="name" id="tname" placeholder="مثال: المجموعة 3 – سعاد"></div>
+  </div>
+  <div class="box" id="quiz"></div>
+  <div class="box">
+    <h2>الإرسال</h2>
+    <div class="row"><button class="btn" id="qCheck">تصحيح الأسئلة الآلية</button><button class="btn ghost" id="qSave">حفظ إجابات المتكوّن</button><span class="score" id="qScore"></span></div>
+    <div class="note hidden" id="qNote"></div>
+  </div>
+</section>
+</main>
+<footer class="f">المرجع: منهاج التربية الإسلامية، مديرية المناهج، يونيو 2016 (الصفحتان 8 و22). الرسومات التفاعلية تخطيطات تنفيذية من إعدادنا، وليست صوراً رسمية من المنهاج. الفيديو وضعية مهنية للتكوين، وليس درساً موجهاً للتلاميذ.</footer>
+
+<!-- modal -->
+<div class="modal hidden" id="modal">
+  <div class="mbar"><b id="mTitle"></b>
+    <button class="btn small" id="zIn">＋ تكبير</button><button class="btn small" id="zOut">－ تصغير</button>
+    <a class="btn small" id="mLink" target="_blank" rel="noopener" style="text-decoration:none">فتح الوثيقة الأصلية ↗</a>
+    <button class="btn small" id="mClose">✕ إغلاق</button></div>
+  <div class="mbody"><div class="mimg" id="mImg"></div></div>
+</div>
+
+<!-- trainer drawer -->
+<aside class="drawer" id="drawer">
+  <div class="dh"><b>⚙ واجهة تحكم الأستاذ المكوّن</b><button id="closeDrawer" aria-label="إغلاق">✕</button></div>
+  <div class="db">
+    <h4>الحصة</h4>
+    <div class="grid">
+      <button class="btn" id="tTimer">▶ بدء زمن الحصة</button>
+      <button class="btn ghost" id="tTimerReset">↺ تصفير الزمن</button>
+    </div>
+    <h4>الانتقال بين المراحل</h4>
+    <div class="grid" id="tSteps"></div>
+    <h4>الفيديو</h4>
+    <div class="grid"><button class="btn" id="tPlay">▶ تشغيل</button><button class="btn ghost" id="tPause">⏸ إيقاف</button></div>
+    <h4>الخريطة</h4>
+    <div class="grid"><button class="btn" id="tMapShow">إظهار الخريطة</button><button class="btn ghost" id="tMapHide">إخفاء الخريطة</button></div>
+    <h4>الحلول</h4>
+    <label class="switch"><input type="checkbox" id="tSol"> كشف الحلول المرجعية في كل المراحل</label>
+    <h4>الوثيقة الأصلية</h4>
+    <div class="grid"><button class="btn ghost" data-open="p8">الصفحة 8</button><button class="btn ghost" data-open="p22">الصفحة 22</button></div>
+    <h4>نتائج المتكونين <span id="resCount"></span></h4>
+    <div id="results"></div>
+    <div class="grid" style="margin-top:10px">
+      <button class="btn" id="expCsv">تنزيل CSV</button>
+      <button class="btn ghost" id="copyRes">نسخ النتائج</button>
+      <button class="btn ghost" id="newTrainee">متكوّن جديد</button>
+      <button class="btn ghost" id="clearRes" style="color:var(--bad);border-color:var(--bad)">حذف كل النتائج</button>
+    </div>
+    <div class="note warn hidden" id="clearConfirm">حذف كل النتائج المحفوظة على هذا الجهاز؟ <button class="btn small" id="clearYes" style="background:var(--bad)">نعم، احذف</button> <button class="btn small ghost" id="clearNo">إلغاء</button></div>
+    <p class="cap">تُحفظ النتائج على هذا المتصفح. للحفظ المركزي، راجع دليل الإدماج.</p>
+  </div>
+</aside>
+<div class="toast" id="toast"></div>
+
+<script>
+/* ==================== CONFIG ==================== */
+const CONFIG = {
+  // لربط ملف الفيديو الحقيقي: ضع مسار الملف هنا، مثال: "video.mp4" ومسار الترجمة "video.ar.vtt"
+  videoSrc: "video.mp4",
+  videoSubs: "",
+  docUrl: "https://profeps.ma/documents/op/op-education-islamique-curriculum-2016.pdf",
+  storeKey: "basira_values_session_v1",
+  onSave: null // دالة اختيارية للإدماج: (record) => {...} لإرسال النتائج إلى المنصة
+};
+const IMG = { p8: document.querySelector('[data-open="p8"] img').src, p22: document.querySelector('[data-open="p22"] img').src };
+
+/* ==================== helpers ==================== */
+const $ = s => document.querySelector(s), $$ = s => [...document.querySelectorAll(s)];
+const el = (tag, attrs={}, html='') => { const e=document.createElement(tag); for(const k in attrs){ if(k==='class') e.className=attrs[k]; else if(k.startsWith('on')) e.addEventListener(k.slice(2),attrs[k]); else e.setAttribute(k,attrs[k]); } if(html) e.innerHTML=html; return e; };
+const store = { get(k,d){ try{ const v=localStorage.getItem(k); return v?JSON.parse(v):d; }catch(e){ return d; } }, set(k,v){ try{ localStorage.setItem(k,JSON.stringify(v)); }catch(e){} } };
+function toast(m){ const t=$('#toast'); t.textContent=m; t.classList.add('on'); clearTimeout(toast._t); toast._t=setTimeout(()=>t.classList.remove('on'),2200); }
+const fmt = s => { s=Math.max(0,Math.floor(s)); return String(Math.floor(s/60)).padStart(2,'0')+':'+String(s%60).padStart(2,'0'); };
+
+/* ==================== state ==================== */
+const blank = () => ({ s1:{sel:[]}, s3:{mcq:null, j:[{d:null,why:'',ok:false},{d:null,why:'',ok:false},{d:null,why:'',ok:false}], amana:{to:null, why:'', saved:false}}, s4:{q1:null,q2:[],q3:null,q4:''}, name:'' });
+let S = store.get(CONFIG.storeKey+'_draft', blank());
+const saveDraft = () => store.set(CONFIG.storeKey+'_draft', S);
+
+/* ==================== stages / nav ==================== */
+const STAGES = [ {t:'الوضعية',r:'00–05'}, {t:'الخريطة',r:'05–15'}, {t:'ورشة التحليل',r:'15–25'}, {t:'التقويم',r:'25–30'} ];
+let cur = 0;
+function go(i){
+  cur=i; $$('.stage').forEach((s,k)=>s.classList.toggle('hidden',k!==i));
+  $$('#steps button').forEach((b,k)=>b.classList.toggle('on',k===i));
+  $$('#tSteps button').forEach((b,k)=>b.classList.toggle('ghost',k!==i));
+  if(i!==0) player.pause();
+  window.scrollTo({top:0,behavior:'smooth'});
+  try{ history.replaceState(null,'','#stage-'+(i+1)); }catch(e){}
+}
+STAGES.forEach((s,i)=>{
+  $('#steps').append(el('button',{onclick:()=>go(i)},`<span>0${i+1} · ${s.t}</span><span class="t">${s.r}</span>`));
+  $('#tSteps').append(el('button',{class:'btn ghost',onclick:()=>go(i)},`0${i+1} · ${s.t}`));
+});
+
+/* session clock */
+let clk = {run:false, base:0, start:0};
+setInterval(()=>{ const t = clk.base + (clk.run ? (Date.now()-clk.start)/1000 : 0); $('#clock').textContent=fmt(t); $('#clock').style.background = t>1800?'#b3412f':''; }, 500);
+$('#tTimer').onclick=()=>{ if(clk.run){ clk.base+= (Date.now()-clk.start)/1000; clk.run=false; $('#tTimer').textContent='▶ استئناف زمن الحصة'; } else { clk.start=Date.now(); clk.run=true; $('#tTimer').textContent='⏸ إيقاف زمن الحصة'; } };
+$('#tTimerReset').onclick=()=>{ clk={run:false,base:0,start:0}; $('#tTimer').textContent='▶ بدء زمن الحصة'; };
+
+/* drawer & solutions */
+$('#openDrawer').onclick=()=>{ renderResults(); $('#drawer').classList.add('open'); };
+$('#closeDrawer').onclick=()=>$('#drawer').classList.remove('open');
+$('#tSol').onchange=e=>{ document.body.classList.toggle('solutions',e.target.checked); toast(e.target.checked?'الحلول المرجعية ظاهرة':'الحلول مخفية'); };
+
+/* ==================== modal (zoomable doc) ==================== */
+let zoom=1;
+function openDoc(which){
+  const page = which==='p8'?8:22;
+  $('#mTitle').textContent = `منهاج التربية الإسلامية 2016 · الصفحة ${page}`;
+  $('#mLink').href = CONFIG.docUrl+'#page='+page;
+  const hl = document.querySelector(`.docimg[data-open="${which}"] .hl`).getAttribute('style');
+  $('#mImg').innerHTML = `<img src="${IMG[which]}" alt="الصفحة ${page}"><div class="hl" style="${hl};position:absolute;border:3px solid #e08a1e;border-radius:6px;background:rgba(255,196,80,.16)"></div>`;
+  zoom = 1; applyZoom(); $('#modal').classList.remove('hidden');
+}
+function applyZoom(){ $('#mImg').style.width = Math.min(96, 52*zoom)+'vw'; $('#mImg').style.maxWidth = (900*zoom)+'px'; }
+document.addEventListener('click',e=>{ const t=e.target.closest('[data-open]'); if(t){ openDoc(t.dataset.open); } });
+$('#zIn').onclick=()=>{ zoom=Math.min(3,zoom+.35); applyZoom(); };
+$('#zOut').onclick=()=>{ zoom=Math.max(.6,zoom-.35); applyZoom(); };
+$('#mClose').onclick=()=>$('#modal').classList.add('hidden');
+$('#modal').addEventListener('click',e=>{ if(e.target.classList.contains('mbody')) $('#modal').classList.add('hidden'); });
+document.addEventListener('keydown',e=>{ if(e.key==='Escape'){ $('#modal').classList.add('hidden'); $('#drawer').classList.remove('open'); } });
+
+/* ==================== drag & drop (mouse + touch + tap) ==================== */
+let armed=null;
+function draggable(chip, onDrop, dropSel){
+  chip.addEventListener('pointerdown', ev=>{
+    if(ev.button>0) return; ev.preventDefault();
+    const sx=ev.clientX, sy=ev.clientY; let g=null, over=null;
+    const move = e=>{
+      if(!g && Math.hypot(e.clientX-sx,e.clientY-sy)>6){ g=chip.cloneNode(true); g.classList.add('dragghost'); document.body.append(g); }
+      if(!g) return;
+      const zf=parseFloat(getComputedStyle(document.documentElement).zoom)||1; g.style.left=(e.clientX/zf)+'px'; g.style.top=(e.clientY/zf)+'px';
+      const t=document.elementFromPoint(e.clientX,e.clientY); const z=t&&t.closest(dropSel);
+      if(over&&over!==z) over.classList.remove('hover'); if(z) z.classList.add('hover'); over=z;
+    };
+    const up = e=>{
+      document.removeEventListener('pointermove',move); document.removeEventListener('pointerup',up);
+      if(over) over.classList.remove('hover');
+      if(g){ g.remove(); if(over) onDrop(chip,over); }
+      else { // tap = arm
+        $$('.chip.sel').forEach(c=>c!==chip&&c.classList.remove('sel'));
+        chip.classList.toggle('sel'); armed = chip.classList.contains('sel') ? {chip,onDrop,dropSel} : null;
+        $$('.armed').forEach(z=>z.classList.remove('armed'));
+        if(armed) $$(dropSel).forEach(z=>z.classList.add('armed'));
+      }
+    };
+    document.addEventListener('pointermove',move); document.addEventListener('pointerup',up);
+  });
+}
+document.addEventListener('click',e=>{
+  if(!armed) return; const z=e.target.closest(armed.dropSel); if(!z) return;
+  const a=armed; armed=null; a.chip.classList.remove('sel'); $$('.armed').forEach(x=>x.classList.remove('armed')); a.onDrop(a.chip,z);
+});
+
+/* ==================== STAGE 1: video ==================== */
+const SCRIPT = [
+  {a:0,b:20,who:'الزميل',txt:'هذا المتعلم تنقصه نقطتان فقط للنجاح. هل يمكن مساعدته بإضافتهما؟'},
+  {a:20,b:33,who:'الأستاذ',txt:'لكن النتيجة ينبغي أن تعكس عمله الحقيقي. وماذا عن حق بقية المتعلمين في الإنصاف؟'},
+  {a:33,b:40,who:'الزميل',txt:'ظروفه الاجتماعية صعبة...'},
+];
+const DUR=60;
+const animSVG = `
+<svg viewBox="0 0 1600 900" xmlns="http://www.w3.org/2000/svg">
+ <defs><linearGradient id="wall" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#e9f1ef"/><stop offset="1" stop-color="#d3e4e1"/></linearGradient></defs>
+ <rect width="1600" height="900" fill="url(#wall)"/>
+ <rect x="0" y="610" width="1600" height="290" fill="#c2d6d2"/>
+ <rect x="80" y="90" width="520" height="290" rx="10" fill="#2f4f4a"/><rect x="96" y="106" width="488" height="258" rx="6" fill="#3d6660"/>
+ <text x="340" y="250" text-anchor="middle" font-size="54" fill="#cfe3df" font-family="Tajawal,sans-serif">التقويم</text>
+ <rect x="1180" y="120" width="300" height="230" rx="8" fill="#fff" stroke="#9cc2bd" stroke-width="4"/>
+ <g stroke="#cbdad7" stroke-width="6"><line x1="1210" y1="170" x2="1450" y2="170"/><line x1="1210" y1="215" x2="1450" y2="215"/><line x1="1210" y1="260" x2="1400" y2="260"/><line x1="1210" y1="305" x2="1430" y2="305"/></g>
+ <!-- table -->
+ <rect x="330" y="560" width="940" height="34" rx="8" fill="#8a6a4a"/><rect x="380" y="594" width="26" height="240" fill="#6f5338"/><rect x="1194" y="594" width="26" height="240" fill="#6f5338"/>
+ <!-- papers -->
+ <g id="papers"><rect x="560" y="520" width="200" height="44" rx="4" fill="#fff" stroke="#bbb" transform="rotate(-4 660 540)"/><rect x="600" y="512" width="200" height="44" rx="4" fill="#fdfdfd" stroke="#bbb"/></g>
+ <g id="sheet"><rect x="840" y="498" width="210" height="64" rx="4" fill="#fffbe9" stroke="#e08a1e" stroke-width="3"/><text x="945" y="540" text-anchor="middle" font-size="26" fill="#9b5a08" font-family="Tajawal,sans-serif">ورقة التنقيط</text></g>
+ <!-- teacher (right) -->
+ <g id="pT"><circle cx="1110" cy="330" r="66" fill="#e0b48f"/><path d="M1044 318q66-90 132 0q-10-60-66-64q-56 4-66 64z" fill="#2c2c2c"/>
+  <path d="M990 560q0-150 120-150q120 0 120 150z" fill="#176b63"/><rect x="1085" y="400" width="50" height="22" fill="#e0b48f"/>
+  <g id="tMouth"><path d="M1088 362q22 14 44 0" stroke="#7a3f2a" stroke-width="5" fill="none"/></g>
+  <circle cx="1088" cy="322" r="6" fill="#222"/><circle cx="1132" cy="322" r="6" fill="#222"/>
+  <text x="1110" y="640" text-anchor="middle" font-size="30" fill="#2f4f4a" font-family="Tajawal,sans-serif">الأستاذ</text></g>
+ <!-- colleague (left) -->
+ <g id="pC"><circle cx="490" cy="330" r="66" fill="#c9966d"/><path d="M424 312q66-84 132 0l-6-34q-60-50-120 0z" fill="#5b3b25"/>
+  <path d="M370 560q0-150 120-150q120 0 120 150z" fill="#8a5a8f"/><rect x="465" y="400" width="50" height="22" fill="#c9966d"/>
+  <g id="cMouth"><path d="M468 362q22 14 44 0" stroke="#6b3420" stroke-width="5" fill="none"/></g>
+  <circle cx="468" cy="322" r="6" fill="#222"/><circle cx="512" cy="322" r="6" fill="#222"/>
+  <text x="490" y="640" text-anchor="middle" font-size="30" fill="#2f4f4a" font-family="Tajawal,sans-serif">الزميل</text></g>
+ <!-- pen -->
+ <g id="pen"><rect x="900" y="470" width="12" height="80" rx="4" fill="#176b63" transform="rotate(30 906 510)"/></g>
+</svg>`;
+$('#anim').innerHTML = animSVG;
+const player = (()=>{
+  const vid=$('#vid'), useVideo=!!CONFIG.videoSrc;
+  let t=0, playing=false, last=0, raf=0;
+  if(useVideo){
+    vid.src=CONFIG.videoSrc; vid.classList.remove('hidden'); $('#anim').classList.add('hidden');
+    if(CONFIG.videoSubs){ vid.querySelector('track').src=CONFIG.videoSubs; $('#subs').classList.add('hidden'); }
+    vid.addEventListener('timeupdate',()=>{ t=vid.currentTime; render(); });
+    vid.addEventListener('ended',()=>{ playing=false; render(); afterEnd(); });
+    vid.addEventListener('pause',()=>{ playing=false; render(); });
+  }
+  function render(){
+    const d = useVideo && vid.duration ? vid.duration : DUR;
+    $('#vBar i').style.width=(t/d*100)+'%';
+    $('#vTime').textContent = `${Math.floor(t/60)}:${String(Math.floor(t%60)).padStart(2,'0')} / ${Math.floor(d/60)}:${String(Math.floor(d%60)).padStart(2,'0')}`;
+    $('#vPlay').textContent = playing?'⏸ إيقاف':'▶ تشغيل';
+    if(!useVideo){
+      const line = SCRIPT.find(s=>t>=s.a&&t<s.b);
+      $('#subs').innerHTML = line?`<span><span class="who">${line.who}:</span> «${line.txt}»</span>`:'';
+    }
+    const fz = !useVideo && t>=40; $('#freeze').classList.toggle('on',fz);
+    if(!useVideo){
+      const sp = SCRIPT.find(s=>t>=s.a&&t<s.b);
+      const talk = (Math.floor(t*6)%2===0);
+      $('#cMouth').setAttribute('transform', sp&&sp.who==='الزميل'&&playing&&talk?'translate(490 362) scale(1 .3) translate(-490 -362)':'');
+      $('#tMouth').setAttribute('transform', sp&&sp.who==='الأستاذ'&&playing&&talk?'translate(1110 362) scale(1 .3) translate(-1110 -362)':'');
+      const zoomIn = Math.min(1,Math.max(0,(t-38)/3));
+      const s = 1+zoomIn*1.4, cx=945, cy=530;
+      $('#anim svg').style.transform = `scale(${s})`; $('#anim svg').style.transformOrigin = `${cx/16}% ${cy/9}%`;
+      $('#pen').setAttribute('transform', t<20 && playing ? `translate(${Math.sin(t*5)*14} ${Math.cos(t*7)*4})` : '');
+    }
+  }
+  function tick(now){ if(!playing) return; t+= (now-last)/1000; last=now; if(t>=DUR){ t=DUR; playing=false; afterEnd(); } render(); if(playing) raf=requestAnimationFrame(tick); }
+  function afterEnd(){ $('#afterVideo').scrollIntoView({behavior:'smooth',block:'start'}); }
+  const api = {
+    play(){ if(useVideo){ vid.play().catch(()=>{}); playing=true; render(); return; } if(t>=DUR) t=0; playing=true; last=performance.now(); raf=requestAnimationFrame(tick); render(); },
+    pause(){ if(useVideo){ vid.pause(); } playing=false; cancelAnimationFrame(raf); render(); },
+    toggle(){ playing?api.pause():api.play(); },
+    seek(x){ if(useVideo){ vid.currentTime = x*(vid.duration||DUR); } else t=x*DUR; render(); },
+    restart(){ api.seek(0); api.play(); }
+  };
+  render(); return api;
+})();
+$('#vPlay').onclick=()=>player.toggle();
+$('#vRestart').onclick=()=>player.restart();
+$('#vBar').onclick=e=>{ const r=e.currentTarget.getBoundingClientRect(); player.seek((e.clientX-r.left)/r.width); };
+$('#player').addEventListener('click',e=>{ if(!e.target.closest('video')) player.toggle(); });
+$('#tPlay').onclick=()=>{ go(0); player.play(); };
+$('#tPause').onclick=()=>player.pause();
+
+const VCARDS=['الأمانة','المسؤولية','الإنصاف','الإحسان'];
+function renderVcards(){
+  $('#vcards').innerHTML='';
+  VCARDS.forEach(v=>$('#vcards').append(el('button',{class:'vcard'+(S.s1.sel.includes(v)?' on':''),onclick:()=>{ const i=S.s1.sel.indexOf(v); i<0?S.s1.sel.push(v):S.s1.sel.splice(i,1); saveDraft(); renderVcards(); }},v)));
+}
+renderVcards();
+$('#showProps').onclick=()=>{
+  const n=$('#propsNote'); n.classList.remove('hidden');
+  const picked = S.s1.sel.length? `اخترتم: <b>${S.s1.sel.join('، ')}</b>.<br>`:'';
+  n.innerHTML = picked + 'هذه قيم تثيرها الوضعية؛ لكن ما موقعها من منظومة القيم الرسمية؟ <br><small>ننتقل إلى الخريطة الرسمية للتحقق.</small> <button class="btn small" style="margin-inline-start:8px" onclick="go(1)">إلى الخريطة ←</button>';
+};
+
+/* ==================== STAGE 2: map ==================== */
+const OFFICIAL = { center:'التوحيد', top:'المحبة', left:'الإحسان', right:'الحرية', bottom:'الاستقامة' };
+const POS = ['top','right','bottom','left'];
+let mapMode='view', revealed=0, mapVisible=true;
+const linesSVG = `<svg class="lines" viewBox="0 0 132 100" preserveAspectRatio="none"><g stroke="#9cc2bd" stroke-width="1.2"><line x1="66" y1="14" x2="66" y2="86"/><line x1="21" y1="50" x2="111" y2="50"/></g></svg>`;
+function renderMap(){
+  const m=$('#map'); m.innerHTML=linesSVG;
+  if(!mapVisible){ m.innerHTML='<div class="note info" style="position:absolute;inset:30% 10%;text-align:center;direction:rtl">الخريطة مخفية من طرف الأستاذ المكوّن</div>'; return; }
+  if(mapMode==='view'){
+    const c=el('div',{class:'node c pos-center',onclick:()=>{ note('info','<b>التوحيد</b> هو <b>القيمة المركزية</b> للمنهاج: «الكمال البشري في إخلاص العمل لله». تدور حوله القيم الناظمة الأربع. اضغط «إظهار القيم الناظمة».'); }},'التوحيد<small>(الكمال البشري في إخلاص العمل لله)</small>');
+    m.append(c);
+    POS.forEach((p,i)=>m.append(el('div',{class:'node v pos-'+p+(i<revealed?'':' off')},OFFICIAL[p])));
+  } else {
+    ['center',...POS].forEach(p=>{
+      const s=el('div',{class:'slot pos-'+p+(p==='center'?' c':''),'data-pos':p},p==='center'?'القيمة المركزية':'قيمة ناظمة');
+      if(rb.placed[p]){ s.classList.add('filled'); s.textContent=rb.placed[p]; }
+      m.append(s);
+    });
+  }
+}
+function note(cls,html){ const n=$('#mapNote'); n.className='note '+cls; n.innerHTML=html; }
+$('#btnReveal').onclick=()=>{
+  mapMode='view'; $('#mapPool').classList.add('hidden'); revealed=0; renderMap();
+  const step=()=>{ revealed++; renderMap(); if(revealed<4) setTimeout(step,650); else note('info','القيم الناظمة الأربع حسب الرسم المرجعي: <b>المحبة، الحرية، الاستقامة، الإحسان</b>.'); };
+  setTimeout(step,250);
+};
+let rb={placed:{},errors:0};
+$('#btnRebuild').onclick=()=>{
+  mapMode='build'; rb={placed:{},errors:0}; renderMap();
+  const pool=$('#mapPool'); pool.classList.remove('hidden'); pool.innerHTML='';
+  const vals=Object.values(OFFICIAL).sort(()=>Math.random()-.5);
+  vals.forEach(v=>{ const c=el('span',{class:'chip'},v); draggable(c,dropMap,'.slot:not(.filled)'); pool.append(c); });
+  note('info','اسحب البطاقات الخمس إلى مواضعها كما في الرسم المرجعي (ص 8). التصحيح فوري.');
+};
+function dropMap(chip,slot){
+  const p=slot.dataset.pos, v=chip.textContent;
+  if(OFFICIAL[p]===v){ rb.placed[p]=v; chip.remove(); renderMap();
+    if(Object.keys(rb.placed).length===5){ note('ok',`✓ أحسنت! الخريطة مطابقة للرسم الرسمي${rb.errors?` (عدد المحاولات الخاطئة: ${rb.errors})`:''}.`); $('#mapPool').classList.add('hidden'); }
+    else note('ok','✓ موضع صحيح.');
+  } else {
+    rb.errors++; slot.classList.add('wrong'); setTimeout(()=>slot.classList.remove('wrong'),450);
+    note('bad', p==='center' ? `✗ «${v}» ليست القيمة المركزية. راجع الوثيقة: ما القيمة التي تتوسط الرسم؟` : (v==='التوحيد'?'✗ التوحيد هو القيمة المركزية، ومكانه في الوسط.':`✗ ليس هذا موضع «${v}» في الرسم المرجعي. قارن مع الصفحة 8.`));
+  }
+}
+$('#tMapShow').onclick=()=>{ mapVisible=true; go(1); renderMap(); };
+$('#tMapHide').onclick=()=>{ mapVisible=false; renderMap(); toast('الخريطة مخفية'); };
+renderMap();
+
+/* ==================== STAGE 3 ==================== */
+const MCQ3=[['أ','القيمة المركزية'],['ب','قيمة ناظمة من الأربع'],['ج','قيمة موضوعية في درس مدرسي']];
+function renderMcq3(){
+  const box=$('#mcq3'); box.innerHTML='';
+  MCQ3.forEach(([k,t])=>{
+    let c='opt'; if(S.s3.mcq===k) c+= k==='ج'?' ok':' bad';
+    box.append(el('button',{class:c,onclick:()=>{ S.s3.mcq=k; saveDraft(); renderMcq3(); }},`<span class="k">${k}</span>${t}`));
+  });
+  const n=$('#mcq3Note');
+  if(S.s3.mcq){ n.classList.remove('hidden');
+    n.className = 'note '+(S.s3.mcq==='ج'?'ok':'bad');
+    n.innerHTML = S.s3.mcq==='ج' ? '✓ صحيح. الأمانة قيمة موضوعية يعالجها درس «حق الله: الوفاء بالأمانة والمسؤولية» ضمن مدخل القسط (الأسبوع 6). القيمة المركزية هي التوحيد، والقيم الناظمة هي المحبة والإحسان والاستقامة والحرية.' : '✗ راجع الخريطة الرسمية: الأمانة لا تظهر في الرسم المرجعي (ص 8) لا قيمةً مركزية ولا قيمة ناظمة.';
+  }
+}
+renderMcq3();
+const JUDG=[
+  {t:'«الأمانة هي القيمة المركزية للمنهاج»', ref:'غير صحيح؛ المركز هو التوحيد.', kind:'fact'},
+  {t:'«يرتبط الوفاء بالأمانة بالاستقامة من حيث الالتزام بالواجب»', ref:'علاقة تحليلية ممكنة.', kind:'analytic'},
+  {t:'«يرتبط الوفاء بالأمانة بالإحسان من حيث إتقان المسؤولية»', ref:'علاقة تحليلية ممكنة.', kind:'analytic'},
+];
+function renderJudg(){
+  const box=$('#judgs'); box.innerHTML='';
+  JUDG.forEach((j,i)=>{
+    const st=S.s3.j[i];
+    const d=el('div',{class:'judg'});
+    d.innerHTML=`<div class="st"><span class="n">${i+1}.</span>${j.t}</div>`;
+    const seg=el('div',{class:'seg'});
+    [['accept','أقبل العلاقة'],['revise','أراجع العلاقة']].forEach(([v,l])=>seg.append(el('button',{class:st.d===v?'on':'',onclick:()=>{ st.d=v; st.ok=false; saveDraft(); renderJudg(); }},l)));
+    d.append(seg);
+    const ta=el('textarea',{placeholder:'علّل اختيارك...'}); ta.value=st.why; ta.style.marginTop='10px'; ta.oninput=()=>{ st.why=ta.value; saveDraft(); };
+    d.append(ta);
+    const b=el('button',{class:'btn small',style:'margin-top:8px',onclick:()=>{
+      if(!st.d){ toast('اختر «أقبل» أو «أراجع» أولاً'); return; }
+      if(!st.why.trim()){ toast('اكتب تعليلك قبل التأكيد'); ta.focus(); return; }
+      st.ok=true; saveDraft(); renderJudg(); }},'أكّد');
+    d.append(b);
+    if(st.ok){
+      let cls, msg;
+      if(j.kind==='fact'){ const good = st.d==='revise'; cls=good?'ok':'bad'; msg=(good?'✓ ':'✗ ')+'الحكم المرجعي: '+j.ref+' (الرسم الرسمي ص 8).'; }
+      else { cls='info'; msg=(st.d==='accept'?'اخترتَ قبول العلاقة. ':'اخترتَ مراجعة العلاقة. ')+'الحكم المرجعي: '+j.ref+' هذه علاقة استنباطية لا ينص عليها الرسم حرفياً؛ قيمتها في جودة التعليل. تم حفظ تعليلك ليفحصه الأستاذ المكوّن.'; }
+      d.append(el('div',{class:'note '+cls},msg));
+    }
+    d.append(el('div',{class:'sol sol-tag'},'الحكم المرجعي: '+j.ref));
+    box.append(d);
+  });
+}
+renderJudg();
+const REG=['المحبة','الإحسان','الاستقامة','الحرية'];
+function renderAmana(){
+  const pool=$('#amanaPool'), zs=$('#amanaZones'); pool.innerHTML=''; zs.innerHTML='';
+  const chip=el('span',{class:'chip amana'},'الأمانة'); draggable(chip,(c,z)=>{ S.s3.amana.to=z.dataset.v; S.s3.amana.saved=false; saveDraft(); renderAmana(); },'.azone');
+  REG.forEach(v=>{ const z=el('div',{class:'azone'+(S.s3.amana.to===v?' got':''),'data-v':v},v); if(S.s3.amana.to===v) z.append(chip); zs.append(z); });
+  if(!S.s3.amana.to) pool.append(chip); else pool.innerHTML='<span class="cap">يمكنك سحب البطاقة إلى قيمة أخرى</span>';
+  $('#amanaWhy').value=S.s3.amana.why;
+}
+$('#amanaWhy').oninput=e=>{ S.s3.amana.why=e.target.value; S.s3.amana.saved=false; saveDraft(); };
+$('#amanaSave').onclick=()=>{
+  const n=$('#amanaNote'); n.classList.remove('hidden');
+  if(!S.s3.amana.to){ n.className='note bad'; n.textContent='اسحب بطاقة الأمانة إلى قيمة ناظمة أولاً.'; return; }
+  if(!S.s3.amana.why.trim()){ n.className='note bad'; n.textContent='اكتب تعليلك قبل الحفظ.'; return; }
+  S.s3.amana.saved=true; saveDraft();
+  n.className='note ok'; n.innerHTML=`✓ تم حفظ الربط: <b>الأمانة ← ${S.s3.amana.to}</b> مع تعليلك. هذه علاقة تحليلية يقوّمها الأستاذ المكوّن، وليست جزءاً من الرسم الرسمي.`;
+};
+renderAmana();
+
+/* ==================== STAGE 4: quiz ==================== */
+const Q1=['المحبة','التوحيد','الأمانة','الاستقامة'];
+const Q2=['المحبة','الأمانة','الإحسان','القسط','الاستقامة','الحرية'];
+const Q2OK=['المحبة','الإحسان','الاستقامة','الحرية'];
+let checked=false;
+function renderQuiz(){
+  const q=$('#quiz'); q.innerHTML='<h2>الأسئلة المبرمجة</h2>';
+  const mk=(title,n)=>{ const d=el('div',{class:'q'}); d.innerHTML=`<h3><span class="n">س${n}</span>${title}</h3>`; return d; };
+  // Q1
+  let d=mk('ما القيمة المركزية للمنهاج؟',1); let o=el('div',{class:'opts inline'});
+  Q1.forEach(v=>{ let c='opt'; if(S.s4.q1===v) c+=' on'; if(checked&&S.s4.q1===v) c+= v==='التوحيد'?' ok':' bad'; o.append(el('button',{class:c,onclick:()=>{S.s4.q1=v;checked=false;saveDraft();renderQuiz();}},v)); });
+  d.append(o); if(checked) d.append(el('div',{class:'note '+(S.s4.q1==='التوحيد'?'ok':'bad')},'الصحيح: التوحيد (الكمال البشري في إخلاص العمل لله).')); d.append(el('div',{class:'sol sol-tag'},'الصحيح: التوحيد')); q.append(d);
+  // Q2
+  d=mk('ما القيم الناظمة؟ (اختر أربعاً)',2); o=el('div',{class:'opts inline'});
+  Q2.forEach(v=>{ const on=S.s4.q2.includes(v); let c='opt'+(on?' on':''); if(checked&&on) c+= Q2OK.includes(v)?' ok':' bad'; o.append(el('button',{class:c,onclick:()=>{ const i=S.s4.q2.indexOf(v); i<0?S.s4.q2.push(v):S.s4.q2.splice(i,1); checked=false; saveDraft(); renderQuiz(); }},(on?'☑ ':'☐ ')+v)); });
+  d.append(o); if(checked) d.append(el('div',{class:'note '+(q2ok()?'ok':'bad')},'الصحيح: المحبة، الإحسان، الاستقامة، الحرية.')); d.append(el('div',{class:'sol sol-tag'},'الصحيح: المحبة، الإحسان، الاستقامة، الحرية')); q.append(d);
+  // Q3
+  d=mk('هل ربط الأمانة بالاستقامة منصوص عليه حرفياً في الخريطة الرسمية؟',3); o=el('div',{class:'opts inline'});
+  ['نعم','لا'].forEach(v=>{ let c='opt'+(S.s4.q3===v?' on':''); if(checked&&S.s4.q3===v) c+= v==='لا'?' ok':' bad'; o.append(el('button',{class:c,onclick:()=>{S.s4.q3=v;checked=false;saveDraft();renderQuiz();}},v)); });
+  d.append(o); if(checked) d.append(el('div',{class:'note '+(S.s4.q3==='لا'?'ok':'bad')},'الصحيح: لا؛ هو علاقة تحليلية معلّلة، وليس جزءاً من الرسم الرسمي.')); d.append(el('div',{class:'sol sol-tag'},'الصحيح: لا؛ هو علاقة تحليلية معللة')); q.append(d);
+  // Q4
+  d=mk('اقترح علاقة بين الأمانة وقيمة ناظمة وعلّلها.',4);
+  const ta=el('textarea',{placeholder:'اكتب العلاقة المقترحة وتعليلها...'}); ta.value=S.s4.q4; ta.oninput=()=>{S.s4.q4=ta.value;saveDraft();};
+  d.append(ta); d.append(el('div',{class:'cap'},'تُحفظ هذه الإجابة للتقويم البشري من طرف الأستاذ المكوّن.')); q.append(d);
+}
+const q2ok=()=> S.s4.q2.length===4 && Q2OK.every(v=>S.s4.q2.includes(v));
+const scoreAuto=()=> (S.s4.q1==='التوحيد'?1:0)+(q2ok()?1:0)+(S.s4.q3==='لا'?1:0);
+renderQuiz();
+$('#tname').value=S.name||''; $('#tname').oninput=e=>{S.name=e.target.value;saveDraft();};
+$('#qCheck').onclick=()=>{
+  if(!S.s4.q1||!S.s4.q2.length||!S.s4.q3){ toast('أجب عن الأسئلة 1 و2 و3 أولاً'); return; }
+  checked=true; renderQuiz(); const s=scoreAuto(); $('#qScore').textContent=`${s} / 3`;
+  const n=$('#qNote'); n.classList.remove('hidden'); n.className='note '+(s===3?'ok':'info');
+  n.innerHTML = s===3 ? '✓ ممتاز. تمييز دقيق بين البنية الرسمية والعلاقات التحليلية.' : 'راجع الإجابات الملونة بالأحمر، وعد إلى الخريطة الرسمية (ص 8) عند الحاجة.';
+};
+
+/* ==================== results ==================== */
+const recs = ()=> store.get(CONFIG.storeKey+'_records',[]);
+$('#qSave').onclick=()=>{
+  if(!S.name.trim()){ toast('اكتب اسم المتكوّن أو المجموعة'); $('#tname').focus(); return; }
+  const r = { time:new Date().toLocaleString('ar-MA'), name:S.name.trim(), s1:S.s1.sel.join('، '), mcq3:S.s3.mcq||'',
+    j:S.s3.j.map(x=>({d:x.d==='accept'?'أقبل':x.d==='revise'?'أراجع':'',why:x.why})), amanaTo:S.s3.amana.to||'', amanaWhy:S.s3.amana.why,
+    q1:S.s4.q1||'', q2:S.s4.q2.join('، '), q3:S.s4.q3||'', q4:S.s4.q4, auto:scoreAuto(), mapErrors:rb.errors };
+  const all=recs(); all.push(r); store.set(CONFIG.storeKey+'_records',all);
+  try{ if(typeof CONFIG.onSave==='function') CONFIG.onSave(r); if(window.parent!==window) window.parent.postMessage({type:'basira-result',record:r},'*'); }catch(e){}
+  toast('تم حفظ إجابات '+r.name); renderResults();
+};
+function esc(s){ return String(s??'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c])); }
+function renderResults(){
+  const all=recs(); $('#resCount').textContent=`(${all.length})`;
+  if(!all.length){ $('#results').innerHTML='<p class="cap">لا توجد نتائج محفوظة بعد.</p>'; return; }
+  let h='<table class="res"><tr><th>المتكوّن</th><th>آلي</th><th>الأمانة ←</th><th>س4 (بشري)</th></tr>';
+  all.forEach((r,i)=>{ h+=`<tr><td><b>${esc(r.name)}</b><br><small>${esc(r.time)}</small></td><td>${r.auto}/3</td><td>${esc(r.amanaTo)}<br><small>${esc(r.amanaWhy)}</small></td><td><small>${esc(r.q4)}</small></td></tr>`;
+    h+=`<tr><td colspan="4"><small>الأحكام: ${r.j.map((x,k)=>`${k+1}) ${esc(x.d)} – ${esc(x.why)}`).join(' | ')}</small></td></tr>`; });
+  $('#results').innerHTML=h+'</table>';
+}
+function toCSV(){
+  const H=['الوقت','المتكون','قيم الوضعية','السؤال التمهيدي','حكم1','تعليل1','حكم2','تعليل2','حكم3','تعليل3','الأمانة مرتبطة بـ','تعليل الربط','س1','س2','س3','س4','النقطة الآلية /3','أخطاء الخريطة'];
+  const rows=recs().map(r=>[r.time,r.name,r.s1,r.mcq3,r.j[0].d,r.j[0].why,r.j[1].d,r.j[1].why,r.j[2].d,r.j[2].why,r.amanaTo,r.amanaWhy,r.q1,r.q2,r.q3,r.q4,r.auto,r.mapErrors]);
+  return '﻿'+[H,...rows].map(r=>r.map(c=>'"'+String(c??'').replace(/"/g,'""')+'"').join(',')).join('\r\n');
+}
+$('#expCsv').onclick=()=>{
+  if(!recs().length){ toast('لا توجد نتائج'); return; }
+  try{ const a=document.createElement('a'); a.href=URL.createObjectURL(new Blob([toCSV()],{type:'text/csv;charset=utf-8'})); a.download='نتائج_المتكونين.csv'; document.body.append(a); a.click(); a.remove(); toast('جارٍ التنزيل… إن لم يبدأ، استعمل «نسخ النتائج»'); }catch(e){ toast('التنزيل غير متاح هنا؛ استعمل «نسخ النتائج»'); }
+};
+$('#copyRes').onclick=async()=>{ try{ await navigator.clipboard.writeText(toCSV().slice(1)); toast('تم النسخ؛ الصقها في Excel أو Sheets'); }catch(e){ toast('تعذر النسخ'); } };
+$('#newTrainee').onclick=()=>{ S=blank(); saveDraft(); checked=false; renderVcards(); renderMcq3(); renderJudg(); renderAmana(); renderQuiz(); $('#tname').value=''; $('#qScore').textContent=''; ['#propsNote','#mcq3Note','#amanaNote','#qNote'].forEach(s=>$(s).classList.add('hidden')); go(0); toast('بدأت جلسة متكوّن جديد'); };
+$('#clearRes').onclick=()=>$('#clearConfirm').classList.remove('hidden');
+$('#clearNo').onclick=()=>$('#clearConfirm').classList.add('hidden');
+$('#clearYes').onclick=()=>{ store.set(CONFIG.storeKey+'_records',[]); $('#clearConfirm').classList.add('hidden'); renderResults(); toast('حُذفت النتائج'); };
+
+/* start */
+const h=(location.hash.match(/stage-(\d)/)||[])[1]; go(h?Math.min(3,h-1):0);
+</script>
+</body>
+</html>
