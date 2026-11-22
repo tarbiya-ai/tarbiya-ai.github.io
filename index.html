@@ -1,0 +1,993 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>هندسة تكوين وحدة ديداكتيك التربية الإسلامية بتوظيف تقنيات الذكاء الاصطناعي</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Aref+Ruqaa:wght@400;700&family=Reem+Kufi:wght@500;700&family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --deep:#0d3b36; --teal:#176b63; --teal2:#2f8a80; --soft:#e7f2ef; --line:#d5e4e0;
+  --gold:#c9a24a; --gold-soft:#f7efd9; --ink:#1b2b29; --muted:#5b6d6a; --bg:#f7f9f8; --white:#fff;
+  --r:18px; --shadow:0 6px 24px rgba(13,59,54,.08);
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:"Tajawal","Segoe UI",Tahoma,sans-serif;font-size:18px;line-height:1.8}
+h1,h2,h3{font-family:"Amiri","Tajawal",serif;line-height:1.35;margin:0}
+a{color:inherit}
+.wrap{max-width:1180px;margin:auto;padding:0 22px}
+
+/* nav */
+nav.top{position:sticky;top:0;z-index:40;background:rgba(13,59,54,.96);backdrop-filter:blur(6px);color:#fff}
+nav.top .wrap{display:flex;align-items:center;gap:18px;height:62px}
+nav.top .logo{font-family:"Reem Kufi","Tajawal";font-weight:700;font-size:17px;white-space:nowrap}
+nav.top .logo span{color:var(--gold)}
+nav.top ul{display:flex;gap:4px;list-style:none;margin:0 auto 0 0;padding:0;overflow-x:auto}
+nav.top ul a{display:block;padding:6px 12px;border-radius:999px;text-decoration:none;font-size:15px;opacity:.85;white-space:nowrap}
+nav.top ul a:hover{background:rgba(255,255,255,.12);opacity:1}
+.btn{display:inline-flex;align-items:center;gap:8px;border:0;border-radius:12px;padding:11px 20px;font:inherit;font-weight:700;cursor:pointer;text-decoration:none}
+.btn.gold{background:var(--gold);color:#2a1f05}
+.btn.light{background:#fff;color:var(--deep)}
+.btn.line{background:transparent;color:#fff;border:1.5px solid rgba(255,255,255,.5)}
+.btn.teal{background:var(--teal);color:#fff}
+
+/* hero */
+header.hero{background:radial-gradient(1200px 500px at 85% -10%,#2a8a7f 0%,transparent 60%),linear-gradient(160deg,var(--deep),#0f4a43 60%,#13564e);color:#fff;position:relative;overflow:hidden}
+header.hero::after{content:"";position:absolute;inset:0;background-image:radial-gradient(rgba(201,162,74,.18) 1.5px,transparent 1.5px);background-size:26px 26px;mask-image:linear-gradient(to left,#000,transparent 70%);pointer-events:none}
+.hero .wrap{position:relative;z-index:1;padding:78px 22px 70px}
+.kicker{display:inline-block;background:rgba(201,162,74,.18);color:#f0d897;border:1px solid rgba(201,162,74,.45);padding:4px 14px;border-radius:999px;font-size:15px;margin-bottom:18px}
+.hero h1{font-size:clamp(30px,4.6vw,54px);max-width:900px}
+.hero h1 em{font-style:normal;color:var(--gold)}
+.hero p.lead{font-size:clamp(17px,2vw,21px);opacity:.9;max-width:760px;margin:18px 0 28px}
+.hero .cta{display:flex;gap:12px;flex-wrap:wrap}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:46px}
+.stat{background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.14);border-radius:16px;padding:16px 18px}
+.stat b{display:block;font-size:34px;color:var(--gold);font-family:"Tajawal";line-height:1.2}
+.stat span{font-size:15px;opacity:.85}
+
+
+/* ===== banner ===== */
+header.hero{background:linear-gradient(160deg,#0a302c 0%,#0f4a43 55%,#145a51 100%)}
+header.hero::after{background-image:url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20width%3D%2296%22%20height%3D%2296%22%20viewBox%3D%220%200%2096%2096%22%3E%3Cg%20fill%3D%22none%22%20stroke%3D%22%23c9a24a%22%20stroke-width%3D%221.1%22%20opacity%3D%220.55%22%3E%3Cpath%20d%3D%22M48%2018%20L56.5%2039.5%20L78%2048%20L56.5%2056.5%20L48%2078%20L39.5%2056.5%20L18%2048%20L39.5%2039.5%20Z%22/%3E%3Cpath%20d%3D%22M27%2027%20L48%2035%20L69%2027%20L61%2048%20L69%2069%20L48%2061%20L27%2069%20L35%2048%20Z%22/%3E%3Ccircle%20cx%3D%2248%22%20cy%3D%2248%22%20r%3D%227%22/%3E%3Cpath%20d%3D%22M0%200%20L10%2010%20M96%200%20L86%2010%20M0%2096%20L10%2086%20M96%2096%20L86%2086%22/%3E%3Cpath%20d%3D%22M0%2048%20L18%2048%20M78%2048%20L96%2048%20M48%200%20L48%2018%20M48%2078%20L48%2096%22/%3E%3C/g%3E%3C/svg%3E");background-size:96px 96px;opacity:.55;mask-image:radial-gradient(ellipse at center,transparent 28%,#000 72%);-webkit-mask-image:radial-gradient(ellipse at center,transparent 28%,#000 72%)}
+header.hero::before{content:"";position:absolute;inset:0;background:radial-gradient(900px 420px at 50% 38%,rgba(201,162,74,.16),transparent 70%);z-index:0}
+.hero .wrap{text-align:center;padding:56px 22px 60px}
+.banner{position:relative;max-width:1000px;margin:0 auto;padding:62px 56px 44px;border-radius:260px 260px 26px 26px / 140px 140px 26px 26px;background:linear-gradient(180deg,rgba(8,40,36,.82),rgba(10,52,47,.72));border:2px solid rgba(201,162,74,.75);box-shadow:0 0 0 7px rgba(10,48,44,.9),0 0 0 8.5px rgba(201,162,74,.45),0 30px 60px rgba(0,0,0,.35)}
+.banner::before{content:"";position:absolute;inset:12px;border-radius:250px 250px 18px 18px / 132px 132px 18px 18px;border:1px dashed rgba(201,162,74,.35);pointer-events:none}
+.banner .star{position:absolute;top:-30px;left:50%;transform:translateX(-50%);width:60px;height:60px}
+.banner .kicker{font-family:"Reem Kufi","Tajawal";letter-spacing:.3px;margin-top:6px}
+.banner h1.title{font-family:"Aref Ruqaa","Amiri",serif;font-weight:700;font-size:clamp(34px,5.4vw,64px);line-height:1.5;margin:8px auto 6px;max-width:900px;background:linear-gradient(180deg,#fff6dc 0%,#f1d48a 38%,#c9a24a 70%,#a77f2c 100%);-webkit-background-clip:text;background-clip:text;color:transparent;filter:drop-shadow(0 2px 0 rgba(0,0,0,.35))}
+.banner .sub{font-family:"Reem Kufi","Tajawal";font-size:clamp(17px,2.1vw,23px);color:#e9dcb4;margin:4px 0 0}
+.orn{display:block;margin:18px auto 16px;width:min(420px,80%);height:24px}
+.hero p.lead{margin:0 auto 26px}
+.hero .cta{justify-content:center}
+.hero .stats{max-width:1000px;margin:40px auto 0}
+@media (max-width:700px){.banner{padding:52px 20px 34px;border-radius:120px 120px 20px 20px/70px 70px 20px 20px} .banner::before{border-radius:110px 110px 14px 14px/62px 62px 14px 14px}}
+
+/* sections */
+section.sec{padding:76px 0;border-bottom:1px solid var(--line)}
+section.sec:nth-of-type(even){background:#fff}
+.sec-head{display:flex;align-items:baseline;gap:14px;margin-bottom:28px;flex-wrap:wrap}
+.sec-num{font-family:"Tajawal";font-weight:800;color:var(--gold);font-size:18px;letter-spacing:.5px}
+.sec-head h2{font-family:"Reem Kufi","Amiri",serif;font-weight:700;font-size:clamp(26px,3.4vw,38px);color:var(--deep)}
+.sec-head p{width:100%;margin:6px 0 0;color:var(--muted);font-size:18px}
+.grid{display:grid;gap:18px}
+.g2{grid-template-columns:repeat(2,1fr)} .g3{grid-template-columns:repeat(3,1fr)} .g4{grid-template-columns:repeat(4,1fr)}
+.card{background:var(--white);border:1px solid var(--line);border-radius:var(--r);padding:22px 24px;box-shadow:var(--shadow)}
+section.sec:nth-of-type(even) .card{background:var(--bg)}
+.card h3{font-size:22px;color:var(--teal);margin-bottom:8px}
+.card p{margin:0;color:#33433f}
+.ic{width:46px;height:46px;border-radius:12px;background:var(--soft);display:flex;align-items:center;justify-content:center;font-size:24px;margin-bottom:12px}
+
+/* time chart */
+.timebar{display:flex;height:64px;border-radius:14px;overflow:hidden;margin:10px 0 16px;box-shadow:var(--shadow)}
+.timebar div{display:flex;align-items:center;justify-content:center;color:#fff;font-weight:800;font-size:17px;white-space:nowrap}
+.tb1{background:var(--teal2);width:18%} .tb2{background:var(--deep);width:70%} .tb3{background:var(--gold);color:#2a1f05!important;width:12%}
+.legend{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.legend .card b{font-size:30px;color:var(--deep);font-family:"Tajawal"}
+.eval{display:flex;gap:14px;margin-top:18px}
+.eval .pill{flex:1;border-radius:14px;padding:16px 18px;color:#fff}
+.eval .p25{background:var(--teal2);flex:25} .eval .p75{background:var(--deep);flex:75}
+.eval b{font-size:28px;display:block}
+
+/* principles */
+.rule{border-inline-start:5px solid var(--gold)}
+
+/* AI map */
+.map{position:relative;display:grid;gap:16px}
+.stage{display:grid;grid-template-columns:150px 1fr;gap:18px;align-items:stretch}
+.stage .when{background:var(--deep);color:#fff;border-radius:16px;padding:16px;display:flex;flex-direction:column;justify-content:center;text-align:center}
+.stage .when b{font-size:20px;color:var(--gold)}
+.stage .when small{opacity:.85}
+.stage .card{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+.tag{display:inline-block;background:var(--gold-soft);color:#7a5a12;border-radius:8px;padding:2px 10px;font-size:14px;font-weight:700;margin-bottom:6px}
+.lbl{font-size:14px;font-weight:800;color:var(--muted);margin-bottom:2px}
+
+/* demos */
+.demo{border-radius:var(--r);overflow:hidden;border:1px solid var(--line);background:#fff;box-shadow:var(--shadow)}
+.demo .bar{background:var(--deep);color:#fff;padding:10px 16px;font-weight:700;display:flex;justify-content:space-between;align-items:center;font-size:16px}
+.demo .bar small{background:var(--gold);color:#2a1f05;border-radius:6px;padding:0 8px;font-size:13px}
+.demo .body{padding:18px}
+.filt{display:grid;grid-template-columns:1fr auto;gap:8px 12px;align-items:center;margin-bottom:10px}
+.meter{height:10px;background:#e6eeec;border-radius:99px;overflow:hidden;grid-column:1/3}
+.meter i{display:block;height:100%;border-radius:99px;background:var(--teal2);width:0;transition:width 1.2s ease}
+.score{font-weight:800;color:var(--teal)}
+.fb{background:var(--gold-soft);border-radius:10px;padding:10px 14px;font-size:16px;margin-top:6px}
+.chat{display:flex;flex-direction:column;gap:10px}
+.msg{max-width:88%;padding:10px 14px;border-radius:14px;font-size:16px}
+.msg.st{background:#eef3f7;align-self:flex-start}
+.msg.st b{color:#3a5a78}
+.msg.me{background:var(--soft);align-self:flex-end}
+.msg.me b{color:var(--teal)}
+.choices{display:flex;flex-wrap:wrap;gap:8px;margin-top:4px}
+.choices button{border:1.5px solid var(--teal2);background:#fff;color:var(--teal);border-radius:10px;padding:6px 12px;font:inherit;font-size:15px;cursor:pointer}
+.choices button.ok{background:var(--teal);color:#fff}
+.choices button.no{border-color:#c46a55;color:#a2402c}
+.loop{display:flex;align-items:center;gap:10px;flex-wrap:wrap;justify-content:center;margin-top:24px}
+.loop .step{background:#fff;border:1px solid var(--line);border-radius:14px;padding:12px 18px;font-weight:700;text-align:center;min-width:170px;box-shadow:var(--shadow)}
+.loop .step small{display:block;font-weight:400;color:var(--muted);font-size:14px}
+.loop .arr{color:var(--gold);font-size:26px}
+.loop .step.human{background:var(--deep);color:#fff}
+.loop .step.human small{color:#cfe3df}
+
+/* model session */
+.model{display:grid;grid-template-columns:1.15fr 1fr;gap:28px;align-items:center}
+.model .shot{position:relative;border-radius:var(--r);overflow:hidden;box-shadow:0 14px 40px rgba(13,59,54,.25)}
+.model .shot img{display:block;width:100%}
+.model .shot .badge{position:absolute;top:14px;right:14px;background:var(--gold);color:#2a1f05;font-weight:800;padding:4px 12px;border-radius:8px;font-size:15px}
+.steps4{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin:16px 0 20px}
+.steps4 div{background:var(--bg);border:1px solid var(--line);border-radius:12px;padding:10px 12px;font-size:16px}
+.steps4 b{color:var(--teal)}
+.minis{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin-top:14px}
+.minis img{width:100%;border-radius:12px;display:block;border:1px solid var(--line)}
+
+/* value */
+.big{font-family:"Tajawal";font-size:44px;font-weight:800;color:var(--teal);line-height:1}
+.vs{display:flex;align-items:center;gap:14px;margin:6px 0 10px}
+.vs s{color:#a2402c;font-size:22px}
+footer{background:var(--deep);color:#cfe3df;padding:34px 0;font-size:15px}
+footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
+.note{font-size:14px;color:var(--muted);margin-top:10px}
+
+/* presentation mode */
+.pbar{display:none}
+body.present nav.top, body.present footer{display:none}
+body.present{overflow:hidden;background:var(--deep)}
+body.present .slide{display:none;position:fixed;inset:0;overflow:auto;padding:46px 0 80px;border:0}
+body.present .slide.on{display:block;animation:fade .45s ease}
+body.present section.sec{background:var(--bg)}
+body.present section.sec:nth-of-type(even){background:#fff}
+@keyframes fade{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
+body.present .pbar{display:flex;position:fixed;bottom:0;left:0;right:0;z-index:90;background:rgba(13,59,54,.97);color:#fff;align-items:center;gap:14px;padding:10px 20px}
+.pbar .dots{display:flex;gap:6px;flex:1;justify-content:center}
+.pbar .dots i{width:10px;height:10px;border-radius:50%;background:rgba(255,255,255,.3);cursor:pointer}
+.pbar .dots i.on{background:var(--gold)}
+.pbar button{background:rgba(255,255,255,.12);color:#fff;border:0;border-radius:10px;padding:6px 14px;font:inherit;cursor:pointer}
+.pbar .timer{font-weight:800;font-variant-numeric:tabular-nums;direction:ltr;background:rgba(0,0,0,.25);padding:4px 12px;border-radius:8px;min-width:72px;text-align:center}
+.pbar .timer.warn{background:#b3412f}
+
+body.present{font-size:16px;line-height:1.65}
+body.present .slide{padding:26px 0 70px}
+body.present .sec-head{margin-bottom:16px}
+body.present .card{padding:14px 18px}
+body.present .card h3{font-size:19px;margin-bottom:4px}
+body.present .ic{width:36px;height:36px;font-size:19px;margin-bottom:6px}
+body.present .timebar{height:48px;margin:6px 0 10px}
+body.present .legend .card b{font-size:24px}
+body.present .grid{gap:12px}
+body.present .map{gap:10px}
+body.present .stage .when b{font-size:17px}
+body.present .eval b{font-size:22px}
+body.present .eval .pill{padding:10px 14px}
+body.present .loop{margin-top:14px}
+body.present .hero .wrap{padding:44px 22px 20px}
+body.present .hero .cta, body.present .hero p.lead{display:none}
+body.present .banner{padding:48px 40px 30px}
+body.present .hero .stats{margin-top:26px}
+@media (max-width:900px){
+  .g3,.g4,.stats,.legend{grid-template-columns:repeat(2,1fr)}
+  .g2,.model,.stage,.stage .card{grid-template-columns:1fr}
+  nav.top ul{display:none}
+}
+@media (max-width:560px){.g3,.g4,.stats,.legend,.steps4,.minis{grid-template-columns:1fr}}
+
+@media (max-width:640px){
+  nav.top .wrap{height:56px;gap:10px}
+  nav.top .logo{white-space:normal;font-size:14px;line-height:1.35}
+  #startPres{display:none}
+  .hero .stats{grid-template-columns:repeat(2,1fr)}
+  .stat b{font-size:26px}
+  .stage .card{grid-template-columns:1fr}
+}
+
+@media (max-height:820px){
+  body.present .banner{padding:38px 30px 20px}
+  body.present .banner h1.title{font-size:40px;line-height:1.4}
+  body.present .orn{margin:8px auto 6px}
+  body.present .hero .stats{margin-top:16px;gap:10px}
+  body.present .stat{padding:8px 12px}
+  body.present .stat b{font-size:24px}
+  body.present #tatir .legend{display:none}
+  body.present .eval .pill{padding:8px 12px}
+  body.present .slide{padding:18px 0 64px}
+}
+html,body{max-width:100%;overflow-x:hidden}
+@media (min-width:1800px){html{zoom:1.15}}
+@media (min-width:2500px){html{zoom:1.6}}
+@media (min-width:3200px){html{zoom:2}}
+
+/* ===== v2 additions ===== */
+.sec-head h2 small.en{font-family:"Tajawal";font-size:.5em;color:var(--muted);font-weight:500}
+.card h3 small{font-family:"Tajawal";font-size:14px;color:var(--muted);font-weight:500}
+.muted{color:var(--muted);font-size:16px;margin:0 0 10px}
+.chip{display:inline-block;background:var(--soft);color:var(--teal);border-radius:999px;padding:2px 12px;font-size:14px;font-weight:700;white-space:nowrap;font-family:"Tajawal"}
+.chip.gold{background:var(--gold-soft);color:#7a5a12}
+.cardhead{display:flex;justify-content:space-between;align-items:flex-start;gap:10px;margin-bottom:10px}
+.cardhead h3{margin:0}
+.btn.sm{padding:6px 12px;font-size:14px}
+/* KPIs */
+.kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:16px}
+.kpi{background:#fff;border:1px solid var(--line);border-radius:var(--r);padding:16px 18px;box-shadow:var(--shadow);border-top:4px solid var(--deep)}
+.kpi.k2{border-top-color:var(--gold)} .kpi.k3{border-top-color:var(--teal2)} .kpi.k4{border-top-color:#6b5bb5}
+.kpi small{display:block;color:var(--muted);font-size:14px;font-weight:700}
+.kpi b{font-family:"Tajawal";font-size:40px;color:var(--deep);line-height:1.1}
+.kpi.k2 b{color:#a98226} .kpi.k3 b{color:var(--teal2)} .kpi.k4 b{color:#6b5bb5}
+.kpi span{font-weight:700;margin-inline-start:6px}
+.kpi p{margin:4px 0 0;font-size:14px;color:var(--muted);line-height:1.5}
+.quote{background:linear-gradient(180deg,#fff,#fbf7ea)!important;border-inline-start:5px solid var(--gold)}
+.quote p{font-family:"Amiri",serif;font-size:19px;line-height:1.9}
+.eval .pill small{display:block;font-size:13px;opacity:.85}
+.r1{border-inline-start-color:#b3412f!important} .r2{border-inline-start-color:var(--gold)!important} .r3{border-inline-start-color:var(--teal2)!important} .r4{border-inline-start-color:#3a5a9a!important}
+/* stations */
+.klegend{display:flex;gap:16px;flex-wrap:wrap;margin:-10px 0 16px;font-size:15px;color:var(--muted)}
+.klegend i{display:inline-block;width:12px;height:12px;border-radius:50%;margin-inline-end:6px;vertical-align:middle}
+i.mix,.k-mix{background:#3a6fb0} i.app,.k-app{background:var(--teal2)} i.eval,.k-eval{background:var(--gold)}
+.stgrid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+.stc{position:relative;text-align:start;background:#fff;border:1px solid var(--line);border-radius:16px;padding:16px;box-shadow:var(--shadow);cursor:pointer;font:inherit;color:inherit;display:flex;flex-direction:column;gap:6px;transition:transform .15s,box-shadow .15s}
+.stc:hover,.stc:focus-visible{transform:translateY(-3px);box-shadow:0 12px 30px rgba(13,59,54,.16);outline:none}
+.stc .no{display:inline-flex;align-items:center;gap:6px;font-weight:800;font-size:14px;color:#fff;border-radius:8px;padding:2px 10px;align-self:flex-start}
+.stc h4{margin:2px 0 0;font-family:"Amiri",serif;font-size:19px;line-height:1.4;color:var(--deep)}
+.stc p{margin:0;font-size:14.5px;color:#4a5b58;line-height:1.6;flex:1}
+.stc .ft{display:flex;justify-content:space-between;align-items:center;gap:6px;font-size:13px;margin-top:6px}
+.stc .ft .h{background:var(--soft);color:var(--teal);border-radius:8px;padding:2px 8px;font-weight:700}
+.stc .ft .o{color:var(--teal);font-weight:800;white-space:nowrap}
+.stc .live{position:absolute;top:12px;left:12px;background:var(--gold);color:#2a1f05;font-size:12px;font-weight:800;border-radius:999px;padding:1px 8px}
+section.sec:nth-of-type(even) .stc{background:var(--bg)}
+/* modal */
+.modal{position:fixed;inset:0;z-index:200;background:rgba(8,30,27,.62);display:flex;align-items:center;justify-content:center;padding:18px}
+.modal[hidden]{display:none}
+.mbox{background:#fff;border-radius:20px;width:min(980px,100%);max-height:calc(100vh - 36px);display:flex;flex-direction:column;overflow:hidden;box-shadow:0 30px 80px rgba(0,0,0,.35)}
+.mbox.small{width:min(680px,100%)}
+.mhead{background:var(--deep);color:#fff;padding:14px 20px;display:flex;justify-content:space-between;align-items:center;gap:12px}
+.mhead h3{font-family:"Reem Kufi","Amiri",serif;font-size:22px;margin-top:4px;color:#fff}
+.mact{display:flex;gap:8px;align-items:center}
+.mx{background:rgba(255,255,255,.14);color:#fff;border:0;border-radius:10px;width:36px;height:36px;font-size:18px;cursor:pointer}
+.mbody{padding:18px 20px;overflow:auto;display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.mbox.small .mbody{grid-template-columns:1fr}
+.el{background:var(--bg);border:1px solid var(--line);border-radius:12px;padding:10px 14px;font-size:15.5px;line-height:1.7}
+.el b{display:block;color:var(--deep);font-size:15px;margin-bottom:2px}
+.el p{margin:0}
+.el ol,.el ul{margin:0;padding-inline-start:20px}
+.el.wide{grid-column:1/-1}
+.el.k4{background:#ecf7f3;border-color:#bfe3d6}
+.el.k8{background:#fcf6e6;border-color:#eedcaa}
+.el.k9{background:#fffaeb;border-color:#eedcaa}
+.el.k15{background:#eef3fb;border-color:#cdd9ee}
+.el.r1{background:#fdf0ee;border-color:#f0c9c1} .el.r2{background:#fcf6e6;border-color:#eedcaa} .el.r3{background:#ecf7f3;border-color:#bfe3d6}
+.tl{list-style:none;padding:0!important}
+.tl li{display:flex;gap:10px;align-items:baseline;margin:3px 0}
+.tl li em{font-style:normal;font-weight:800;color:#fff;background:var(--teal);border-radius:6px;padding:0 7px;font-size:13px;white-space:nowrap}
+/* diagnostic */
+.howbox{display:grid;grid-template-columns:96px 1fr auto;gap:18px;align-items:center;background:#fff;border:1px solid var(--line);border-radius:var(--r);padding:16px 20px;box-shadow:var(--shadow)}
+section.sec:nth-of-type(even) .howbox{background:var(--bg)}
+.howbox h3{color:var(--teal);font-size:20px}
+.howbox p{margin:4px 0 0;font-size:16px}
+.qr{background:#fff;border:1px solid var(--line);border-radius:12px;padding:8px}
+.qr svg{display:block;width:100%}
+.qbox{background:#fffaeb;border:1px solid #eedcaa;border-radius:12px;padding:12px 14px;font-size:16px;line-height:1.8}
+.mini-h{font-size:17px;color:var(--deep);margin:14px 0 6px;font-family:"Tajawal"}
+.ticks{list-style:none;padding:0;margin:0;font-size:15.5px}
+.ticks li{position:relative;padding-inline-start:26px;margin:6px 0}
+.ticks li::before{content:"✓";position:absolute;inset-inline-start:0;top:0;color:#fff;background:var(--teal2);border-radius:50%;width:18px;height:18px;font-size:12px;display:flex;align-items:center;justify-content:center;margin-top:4px}
+.abar{margin:10px 0}
+.abar div{display:flex;justify-content:space-between;gap:8px;font-size:15px}
+.abar div b{white-space:nowrap}
+.abar i{display:block;height:12px;background:#eef2f1;border-radius:99px;overflow:hidden;margin-top:4px}
+.abar em{display:block;height:100%;border-radius:99px;transition:width .8s ease}
+.abar.r b{color:#b3412f} .abar.r em{background:#c0503c}
+.abar.o b{color:#b26a12} .abar.o em{background:#d98b2b}
+.abar.g b{color:#1d7a4f} .abar.g em{background:#2b9a66}
+.tiles3,.tiles2{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:14px}
+.tiles2{grid-template-columns:1fr 1fr}
+.t{border-radius:12px;padding:10px;text-align:center;font-size:14px;border:1px solid}
+.t b{display:block;font-size:24px;font-family:"Tajawal"}
+.t.r{background:#fdf0ee;border-color:#f0c9c1;color:#8f3122} .t.o{background:#fdf5e6;border-color:#f1d8ad;color:#8a5a12} .t.g{background:#ecf7f1;border-color:#bfe3cf;color:#1d6a45}
+.model-ans{margin-top:14px;background:var(--soft);border-radius:12px;padding:8px 14px;font-size:15px}
+.model-ans summary{cursor:pointer;font-weight:800;color:var(--deep)}
+.model-ans p{margin:8px 0}
+.sub-h{font-size:22px;color:var(--deep);margin:30px 0 12px;display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+.phases{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+.ph{position:relative;background:#fff;border:1px solid var(--line);border-top:4px solid var(--teal);border-radius:14px;padding:14px;box-shadow:var(--shadow)}
+.ph:nth-child(2){border-top-color:var(--gold)} .ph:nth-child(3){border-top-color:#3a5a9a} .ph:nth-child(4){border-top-color:var(--teal2)}
+section.sec:nth-of-type(even) .ph{background:var(--bg)}
+.ph .pn{display:inline-flex;width:28px;height:28px;border-radius:8px;background:var(--deep);color:#fff;font-weight:800;align-items:center;justify-content:center}
+.ph .pt{float:left;font-size:13px;font-weight:800;color:#7a5a12;background:var(--gold-soft);border-radius:8px;padding:2px 8px}
+.ph h4{font-size:17px;margin:8px 0 4px;color:var(--deep)}
+.ph p{margin:0;font-size:14.5px;line-height:1.65;color:#40514e}
+/* filter + simulator */
+.samples{display:flex;gap:8px;flex-wrap:wrap;margin:-8px 0 16px}
+.samples button{border:1.5px solid var(--line);background:#fff;border-radius:999px;padding:6px 14px;font:inherit;font-size:15px;cursor:pointer;color:var(--deep)}
+.samples button.on{background:var(--deep);color:#fff;border-color:var(--deep)}
+.fgrid{display:grid;grid-template-columns:.9fr 1.1fr;gap:18px;align-items:start}
+.fields{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.fields div,.field{background:var(--bg);border:1px solid var(--line);border-radius:10px;padding:8px 12px;margin-bottom:10px}
+section.sec:nth-of-type(even) .fields div,section.sec:nth-of-type(even) .field{background:#fff}
+.fields small,.field small{display:block;color:var(--muted);font-size:13px;font-weight:700}
+.fields b,.field b{font-size:15.5px;color:var(--deep)}
+.draftTxt{margin:4px 0 0;font-size:15px;line-height:1.75;max-height:190px;overflow:auto}
+.wait{border:2px dashed var(--line);border-radius:14px;padding:30px;text-align:center;color:var(--muted)}
+.fres{border-radius:12px;padding:10px 14px;margin-bottom:10px;border:1px solid;font-size:15px;line-height:1.7;animation:fade .4s ease both}
+.fres b{display:block;font-size:16px}
+.fres.ok{background:#ecf7f1;border-color:#bfe3cf} .fres.ok b{color:#1d6a45}
+.fres.warn{background:#fdf5e6;border-color:#f1d8ad} .fres.warn b{color:#8a5a12}
+.fres.no{background:#fdf0ee;border-color:#f0c9c1} .fres.no b{color:#8f3122}
+.better{border:2px solid #9fd3bf;background:#f3fbf8;border-radius:14px;padding:12px 14px;margin-top:6px;animation:fade .5s .3s ease both}
+.better h4{margin:0 0 8px;color:var(--deep);display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap;font-size:17px}
+.better .blk{background:#fff;border:1px solid var(--line);border-radius:10px;padding:8px 12px;margin-top:8px;font-size:15px;line-height:1.75}
+.better .blk b{color:var(--deep)}
+.better .blk.img{background:#fffaeb;border-color:#eedcaa}
+.ayah{font-family:"Amiri",serif;font-size:18px}
+.chat .msg{max-width:92%}
+.msg.ai{background:#f3f6f9;align-self:flex-start;border:1px solid #e1e8ef}
+.msg.ai b{color:#3a5a78}
+.msg.tr{background:var(--deep);color:#fff;align-self:flex-end}
+.msg.tr b{color:var(--gold)}
+.opts{display:grid;gap:8px;margin-top:6px}
+.opts button{text-align:start;border:1.5px solid var(--line);background:#fff;border-radius:12px;padding:8px 12px;font:inherit;font-size:15px;cursor:pointer;color:var(--ink)}
+.opts button:hover{border-color:var(--teal2)}
+.opts button.ok{background:#ecf7f1;border-color:#2b9a66}
+.opts button.no{background:#fdf0ee;border-color:#c0503c}
+.obst{background:var(--bg);border:1px solid var(--line);border-radius:12px;padding:10px 14px;font-size:15px;margin-bottom:10px}
+.obst.gold{background:#fffaeb;border-color:#eedcaa}
+.obst p{margin:4px 0 0}
+.sfb{border-radius:12px;padding:10px 14px;font-size:15px;margin-bottom:10px;background:#fffaeb;border:1px solid #eedcaa}
+.sfb p{margin:4px 0 0}
+.sfb.ok{background:#ecf7f1;border-color:#bfe3cf} .sfb.ok b{color:#1d6a45}
+.sfb.no{background:#fdf0ee;border-color:#f0c9c1} .sfb.no b{color:#8f3122}
+/* governance */
+.cmp{margin:12px 0}
+.cl{display:flex;justify-content:space-between;gap:8px;font-size:15px;font-weight:700;flex-wrap:wrap}
+.cl .bad{color:#b3412f} .cl .good{color:#1d7a4f}
+.sbar{display:flex;height:34px;border-radius:10px;overflow:hidden;margin-top:6px}
+.sbar i{display:flex;align-items:center;justify-content:center;color:#fff;font-style:normal;font-size:13px;font-weight:700;white-space:nowrap;overflow:hidden;padding:0 4px}
+.road{display:flex;gap:12px;align-items:flex-start;background:var(--bg);border:1px solid var(--line);border-radius:12px;padding:10px 12px;margin-top:10px;font-size:15px;line-height:1.7}
+section.sec:nth-of-type(even) .road{background:#fff}
+.road span{flex:none;width:28px;height:28px;border-radius:8px;background:var(--deep);color:#fff;font-weight:800;display:flex;align-items:center;justify-content:center}
+.road:nth-child(4) span{background:var(--gold);color:#2a1f05} .road:nth-child(5) span{background:#3a5a9a}
+#openCharter{white-space:nowrap}
+/* present mode compaction for new parts */
+body.present .kpi{padding:10px 14px} body.present .kpi b{font-size:30px}
+body.present .quote p{font-size:16px;line-height:1.7}
+body.present .stc{padding:12px} body.present .stc p{font-size:13.5px}
+body.present .ph p{font-size:13.5px}
+body.present .howbox{padding:10px 16px}
+/* responsive */
+@media (max-width:1100px){.stgrid{grid-template-columns:repeat(2,1fr)} .phases{grid-template-columns:repeat(2,1fr)} nav.top ul a{padding:6px 8px;font-size:14px}}
+@media (max-width:900px){.kpis{grid-template-columns:repeat(2,1fr)} .fgrid{grid-template-columns:1fr} .howbox{grid-template-columns:72px 1fr} .howbox .btn{grid-column:1/-1} .mbody{grid-template-columns:1fr}}
+@media (max-width:640px){#openCharter{display:none} .stgrid,.phases{grid-template-columns:1fr} .tiles3{grid-template-columns:repeat(3,1fr)} .t b{font-size:19px} .fields{grid-template-columns:1fr} .kpi b{font-size:32px} .mhead h3{font-size:18px} .modal{padding:8px} .sbar i{font-size:11px}}
+@media (max-width:420px){.kpis{grid-template-columns:1fr} .tiles2{grid-template-columns:1fr}}
+
+.grid>*,.fgrid>*{min-width:0}
+.cardhead{flex-wrap:wrap}
+@media (max-width:1400px){#openCharter{display:none} nav.top .logo .lx{display:none} #startPres{white-space:nowrap} nav.top ul a{padding:6px 9px;font-size:14px}}
+@media (min-width:1800px){.mbox{max-height:calc((100vh - 36px)/1.15)}}
+@media (min-width:2500px){.mbox{max-height:calc((100vh - 36px)/1.6)}}
+@media (min-width:3200px){.mbox{max-height:calc((100vh - 36px)/2)}}
+
+body.present #tashkhis .ticks, body.present #tashkhis .mini-h, body.present #tashkhis .model-ans, body.present #tashkhis .howbox p, body.present #tashkhis .muted{display:none}
+body.present #tashkhis .qbox{font-size:14.5px;line-height:1.6;padding:8px 12px}
+body.present #tashkhis .sub-h{margin:14px 0 8px;font-size:19px}
+body.present #tashkhis .ph h4{font-size:15.5px} body.present #tashkhis .ph p{font-size:13px;line-height:1.5}
+body.present #tashkhis .tiles3{margin-top:8px} body.present #tashkhis .abar{margin:6px 0}
+body.present #tashkhis .tiles3, body.present #tashkhis .howbox .qr{display:none} body.present #tashkhis .howbox{grid-template-columns:1fr auto} body.present #tashkhis .grid{margin-top:10px!important}
+body.present #musaffi .note, body.present #qima .grid+.grid{display:none}
+body.present #musaffi .draftTxt{max-height:130px}
+body.present .sec-head p{font-size:16px}
+@media (max-width:1100px){body.present .stgrid{grid-template-columns:repeat(4,1fr)} body.present .stc p{display:none}}
+.mhead>div:first-child{min-width:0}
+.mhead .chip{white-space:normal}
+.mbody{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}
+@media (max-width:900px){.mbody{grid-template-columns:minmax(0,1fr)}}
+@media (max-width:640px){.mhead{flex-wrap:wrap;padding:12px 14px} .mact{width:100%;justify-content:space-between} .mbody{padding:12px} .stc .ft{flex-wrap:wrap}}
+/* print: only the open station card */
+@media print{
+  body.printing > *:not(#stModal){display:none!important}
+  body.printing #stModal{position:static;background:none;padding:0;display:block}
+  body.printing .mbox{box-shadow:none;max-height:none;width:100%;border-radius:0}
+  body.printing .mbody{overflow:visible}
+  body.printing .mact{display:none}
+  body.printing .mhead{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  body.printing .el{break-inside:avoid}
+}
+</style>
+</head>
+<body>
+<nav class="top"><div class="wrap">
+  <div class="logo">ديداكتيك التربية الإسلامية <span class="lx">× AI</span></div>
+  <ul>
+    <li><a href="#tatir">التأطير</a></li>
+    <li><a href="#dawabit">الضوابط</a></li>
+    <li><a href="#mahattat">المحطات</a></li>
+    <li><a href="#kharita">خريطة الذكاء الاصطناعي</a></li>
+    <li><a href="#tashkhis">التشخيص</a></li>
+    <li><a href="#musaffi">المصفي</a></li>
+    <li><a href="#muhaki">المحاكي</a></li>
+    <li><a href="#namudhaj">النموذج</a></li>
+    <li><a href="#qima">الحوكمة</a></li>
+  </ul>
+  <button class="btn gold" id="startPres" style="padding:7px 14px;font-size:15px">▶ وضع العرض</button>
+</div></nav>
+
+<!-- 0 HERO -->
+<header class="hero slide" id="top">
+  <div class="wrap">
+    <div class="banner">
+      <svg class="star" viewBox="0 0 60 60" aria-hidden="true"><g fill="#0d3b36" stroke="#c9a24a" stroke-width="2"><rect x="12" y="12" width="36" height="36"/><rect x="12" y="12" width="36" height="36" transform="rotate(45 30 30)"/></g><circle cx="30" cy="30" r="7" fill="#c9a24a"/></svg>
+      <span class="kicker">المراكز الجهوية لمهن التربية والتكوين (CRMEF) · حقيبة تكوينية رقمية تفاعلية</span>
+      <h1 class="title">هندسة تكوين وحدة ديداكتيك التربية الإسلامية<br>بتوظيف تقنيات الذكاء الاصطناعي</h1>
+      <svg class="orn" viewBox="0 0 420 24" aria-hidden="true"><g stroke="#c9a24a" fill="none" stroke-width="1.5"><path d="M0 12 H160"/><path d="M260 12 H420"/><path d="M170 12 L185 4 L200 12 L185 20 Z" fill="#c9a24a" fill-opacity=".25"/><path d="M220 12 L235 4 L250 12 L235 20 Z" fill="#c9a24a" fill-opacity=".25"/><path d="M210 2 L220 12 L210 22 L200 12 Z" fill="#c9a24a"/></g></svg>
+      <p class="sub">نموذج رقمي تفاعلي قابل للتطوير والتعميم</p>
+    </div>
+    <p class="lead" style="margin-top:26px">هندسة ديداكتيكية ذكية تُدرج تقنيات الذكاء الاصطناعي في محطات تكوينية محددة، مرجعيتها المقرر الوزاري 24-053 ومنهاج التربية الإسلامية 2016، وليست منصة بديلة عن التكوين الحضوري.</p>
+    <div class="cta">
+      <a class="btn gold" href="#mahattat">المحطات التكوينية الثماني</a>
+      <a class="btn line" href="#musaffi">الأدوات الذكية في العمل</a>
+    </div>
+    <div class="stats">
+      <div class="stat"><b>34</b><span>ساعة: الغلاف الزمني الرسمي للوحدة</span></div>
+      <div class="stat"><b>8</b><span>محطات تكوينية ببطاقات من 18 عنصراً</span></div>
+      <div class="stat"><b>3</b><span>أدوات ذكية: الاستمارة القبلية، المصفي، المحاكي</span></div>
+      <div class="stat"><b>25/75</b><span>مراقبة مستمرة / وضعية مركبة</span></div>
+    </div>
+  </div>
+</header>
+
+<!-- 1 TATIR -->
+<section class="sec slide" id="tatir"><div class="wrap">
+  <div class="sec-head"><span class="sec-num">01</span><h2>الهندسة العامة والتأطير الرسمي</h2><p>مطابقة صارمة للمقرر 24-053 دون زيادة أو نقصان · باراديغم <b>(عملي – نظري – عملي)</b> · الفصل المعكوس الذكي</p></div>
+  <div class="kpis">
+    <div class="kpi"><small>الغلاف الزمني الإجمالي</small><b>34</b><span>ساعة تكوينية</span><p>مطابقة صارمة للمقرر 24-053 دون زيادة أو نقصان</p></div>
+    <div class="kpi k2"><small>الأنشطة التطبيقية والورشات</small><b>24</b><span>ساعة (70,6%)</span><p>تُدار عبر مختبر النقد الديداكتيكي والمحاكاة</p></div>
+    <div class="kpi k3"><small>الدروس النظرية المؤطرة</small><b>6</b><span>ساعات (17,6%)</span><p>تنظير بؤري مبني على نتائج التشخيص القبلي</p></div>
+    <div class="kpi k4"><small>التقويم والدعم والمعالجة</small><b>4</b><span>ساعات (11,8%)</span><p>25% مراقبة مستمرة + 75% وضعية مركبة</p></div>
+  </div>
+  <div class="timebar"><div class="tb1">6 س · 17,6%</div><div class="tb2">24 ساعة أنشطة تطبيقية · 70,6%</div><div class="tb3">4 س · 11,8%</div></div>
+  <div class="grid g2" style="margin-top:18px">
+    <div class="card quote"><h3>الكفاية المستهدفة للوحدة <small>(نص المقرر الوزاري 24-053)</small></h3>
+      <p>«في نهاية الوحدة، يصبح الطالب قادراً على استثمار المفاهيم الأساس الخاصة بديداكتيك مادة التربية الإسلامية، وعلى تعبئة موارده المكتسبة من خلال الوحدة، وتوظيفها في الوضعيات المهنية والممهننة، وذلك بمراعاة خصوصيات النظام التربوي المغربي، وخصوصيات المنهاج، والفئة المستهدفة، والمقاربات البيداغوجية والديداكتيكية المتبناة، مع القدرة على توظيف تكنولوجيا المعلومات والاتصال في التربية، في مادة التربية الإسلامية».</p></div>
+    <div class="card"><h3>نظام التقويم الرسمي <small>(المادة 4 من المقرر 24-053)</small></h3>
+      <div class="eval"><div class="pill p25"><b>25%</b>مراقبة مستمرة<small>تقويم الورشات والملف الرقمي</small></div><div class="pill p75"><b>75%</b>اختبار نهاية الوحدة<small>وضعية مركبة تغطي المحاور</small></div></div>
+      <p style="margin-top:14px"><b>المرجعية الملزمة:</b> المقرر الوزاري رقم 24-053 (22 يونيو 2024) ومنهاج التربية الإسلامية (يونيو 2016). المشروع لا يُعدّ منصة بديلة، بل هندسة ديداكتيكية ذكية تُدرج تقنيات الذكاء الاصطناعي في محطات محددة.</p>
+    </div>
+  </div>
+</div></section>
+
+<!-- 2 DAWABIT -->
+<section class="sec slide" id="dawabit"><div class="wrap">
+  <div class="sec-head"><span class="sec-num">02</span><h2>ميثاق الضوابط الشرعية والمنهجية</h2><p>مرجعية ملزمة تحكم كل استعمال للذكاء الاصطناعي داخل الوحدة.</p></div>
+  <div class="grid g2">
+    <div class="card rule r1"><div class="ic">⛔</div><h3>1. حظر توليد النصوص الشرعية آلياً</h3><p>يُمنع توليد الآيات أو الأحاديث أو إكمالها بالذكاء الاصطناعي؛ وتُستدعى حصراً من <b>مصفوفة نصوص رسمية موثقة</b> مأخوذة حرفياً من منهاج 2016 برواية ورش عن نافع.</p></div>
+    <div class="card rule r2"><div class="ic">🖼️</div><h3>2. ضوابط الوضعيات المصورة الرمزية</h3><p>حظر قطعي لتجسيد الذات الإلهية، والملائكة، والأنبياء والرسل، والصحابة، وآل البيت، والأئمة والعلماء، والغيبيات، أو تشخيص العقائد في رسوم أو صور؛ وتُحصر الصور في مشاهد حياتية معاصرة رمزية للتلاميذ والأسرة والبيئة.</p></div>
+    <div class="card rule r3"><div class="ic">🕌</div><h3>3. الالتزام بالثوابت الدينية المغربية</h3><p>ضبط المعالجة الديداكتيكية بالثوابت الوطنية: <b>العقيدة الأشعرية، والمذهب المالكي، والتصوف السني، وإمارة المؤمنين</b>، ومنع الذكاء الاصطناعي من الإفتاء أو التفسير.</p></div>
+    <div class="card rule r4"><div class="ic">🧑‍🏫</div><h3>4. المركزية البشرية للأستاذ المكوّن</h3><p>الذكاء الاصطناعي مساعد تقني لترشيد الزمن وتوليد المسودات الأولية؛ وتبقى المصادقة العلمية والشرعية والتأطير الحضوري بيد الأستاذ المكوّن (Human-in-the-Loop).</p></div>
+  </div>
+  <div style="text-align:center;margin-top:18px"><button class="btn teal" onclick="openModal(document.getElementById('chModal'))">🛡 عرض ميثاق الضوابط كاملاً</button></div>
+  <div class="loop">
+    <div class="step">الذكاء الاصطناعي<small>يقترح مسودة ديداكتيكية</small></div><span class="arr">←</span>
+    <div class="step human">الأستاذ المكوّن<small>مراجعة ومصادقة علمية وشرعية</small></div><span class="arr">←</span>
+    <div class="step">اعتماد<small>ثم توظيف في التكوين</small></div>
+  </div>
+</div></section>
+
+<!-- 3 MAHATTAT -->
+<section class="sec slide" id="mahattat"><div class="wrap">
+  <div class="sec-head"><span class="sec-num">03</span><h2>المحطات التكوينية الثماني والبطاقات التفصيلية</h2><p>اضغط على أي محطة لفتح بطاقتها التكوينية التفصيلية ذات الـ 18 عنصراً، وطباعتها أو حفظها بصيغة PDF.</p></div>
+  <div class="klegend"><span><i class="mix"></i>دروس + تطبيق</span><span><i class="app"></i>ورشات تطبيقية</span><span><i class="eval"></i>تقويم</span></div>
+  <div class="stgrid" id="stgrid"></div>
+</div></section>
+
+<!-- 4 KHARITA -->
+<section class="sec slide" id="kharita"><div class="wrap">
+  <div class="sec-head"><span class="sec-num">04</span><h2>أين تندرج تقنيات الذكاء الاصطناعي بالضبط داخل الوحدة؟</h2></div>
+  <div class="map">
+    <div class="stage">
+      <div class="when"><b>المحطات 1 و2 و3</b><small>قبل الحصة · الفصل المعكوس الذكي</small></div>
+      <div class="card">
+        <div><div class="lbl">التقنية</div><span class="tag">Flipped Forms</span><p>استمارات تشخيصية قبلية ممهننة (رابط مباشر + QR Code) مدعومة بالتحليل اللغوي الدلالي.</p></div>
+        <div><div class="lbl">الوظيفة</div><p>فرز إجابات الطلبة الأساتذة قبل الحصة بـ 48 ساعة لتحديد نسب الخلط المفاهيمي، وتوجيه الساعات الست النظرية نحو المعالجة البؤرية.</p></div>
+      </div>
+    </div>
+    <div class="stage">
+      <div class="when"><b>المحطة 4</b><small>الوضعيات الديداكتيكية · 4 ساعات تطبيقية</small></div>
+      <div class="card">
+        <div><div class="lbl">التقنية</div><span class="tag">Didactic Micro-Feedback Filter</span><p>«المصفي الديداكتيكي الذكي» بأربعة مرشحات مضبوطة بالمقرر 24-053 ومنهاج 2016.</p></div>
+        <div><div class="lbl">الوظيفة</div><p>اختزال الفحص الأولي لمسودات المجموعات من 90 دقيقة إلى 30 ثانية، وتقديم تغذية راجعة دقيقة ونسخة مجوّدة يصادق عليها المكوّن.</p></div>
+      </div>
+    </div>
+    <div class="stage">
+      <div class="when"><b>المحطتان 3 و6</b><small>التمثلات وتحليل الممارسات</small></div>
+      <div class="card">
+        <div><div class="lbl">التقنية</div><span class="tag">Role-Play Simulator</span><p>«محاكي المواقف الصفية والتمثلات».</p></div>
+        <div><div class="lbl">الوظيفة</div><p>تقمّص متعلمين مراهقين يطرحون تمثلات أو عوائق عقدية/فقهية، لتدريب الطالب الأستاذ على تشخيص العائق واتخاذ قرار ديداكتيكي معلل دون جدال عقيم أو إفتاء.</p></div>
+      </div>
+    </div>
+    <div class="stage">
+      <div class="when"><b>المحطتان 7 و8</b><small>التكنولوجيا والتقويم</small></div>
+      <div class="card">
+        <div><div class="lbl">التقنية</div><span class="tag">أدوات التقويم و E-Portfolio</span><p>شبكات التصحيح المعيارية، والملف التراكمي الرقمي، وتوليد خطط الدعم الفردية.</p></div>
+        <div><div class="lbl">الوظيفة</div><p>التدرب على الاستعمال المسؤول للتكنولوجيا في المادة، وتقويم نماء الكفاية المهنية (25% مراقبة مستمرة / 75% وضعية مركبة).</p></div>
+      </div>
+    </div>
+  </div>
+</div></section>
+
+<!-- 5 TASHKHIS -->
+<section class="sec slide" id="tashkhis"><div class="wrap">
+  <div class="sec-head"><span class="sec-num">05</span><h2>التشخيص القبلي الذكي: الاستمارة القبلية ولوحة مؤشرات القاعة</h2><p>تفعيل «الفصل المعكوس الذكي»: يرسل المكوّن وضعية تشخيصية ممهننة قبل الحصة لتوجيه الساعات النظرية الست نحو المعالجة البؤرية.</p></div>
+  <div class="howbox">
+    <div class="qr" aria-hidden="true"><svg viewBox="0 0 21 21" shape-rendering="crispEdges"><path fill="#0d3b36" d="M0 0h7v7H0zM14 0h7v7h-7zM0 14h7v7H0z"/><path fill="#fff" d="M1 1h5v5H1zM15 1h5v5h-5zM1 15h5v5H1z"/><path fill="#0d3b36" d="M2 2h3v3H2zM16 2h3v3h-3zM2 16h3v3H2zM8 0h1v2H8zM10 1h2v1h-2zM9 3h2v2H9zM12 4h1v3h-1zM8 6h2v1H8zM0 8h2v1H0zM3 8h3v1H3zM8 8h3v2H8zM12 9h2v1h-2zM15 8h2v2h-2zM18 8h3v1h-3zM1 10h2v2H1zM5 10h2v1H5zM10 11h1v3h-1zM13 11h3v1h-3zM17 11h1v2h-1zM19 11h2v3h-2zM8 13h1v2H8zM12 13h2v2h-2zM15 14h3v1h-3zM9 16h3v1H9zM14 16h1v3h-1zM16 17h2v2h-2zM19 16h2v1h-2zM8 18h3v1H8zM12 19h1v2h-1zM18 20h3v1h-3z"/></svg></div>
+    <div><h3>كيف تشتغل الاستمارة القبلية فعلياً؟</h3><p>يولّد النظام رابطاً مباشراً ورمز استجابة سريعة (QR Code) يمسحه الطلبة الأساتذة بهواتفهم قبل الحصة بـ <b>48 ساعة</b>. بمجرد إرسال الإجابات، تنتقل الردود آلياً إلى محلل النصوص الدلالي، فيتحدّث <b>الرسم البياني ولوحة المؤشرات الإبستمولوجية</b> في واجهة الأستاذ المكوّن لحظة بلحظة.</p></div>
+    <button class="btn gold" id="simResp">⚡ محاكاة ورود إجابة طالب</button>
+  </div>
+  <div class="grid g2" style="margin-top:18px">
+    <div class="card">
+      <div class="cardhead"><h3>نموذج الاستمارة التشخيصية القبلية (Flipped Form)</h3><span class="chip">فوج: 30 طالباً أستاذاً</span></div>
+      <div class="qbox"><b>السؤال التشخيصي الممهنن المرسل للطلبة قبل الحصة:</b><br>«أثناء تدبير درس <b>"فقه العبادات: الصلاة – الزكاة – الصيام"</b> في مدخل الاستجابة بالجذع المشترك، اعترضك تلميذ قائلاً: <i>"أرى تعارضاً بين حرية الفرد المطلقة في التصرف بماله الخاص وبين إلزامية إخراج الزكاة"</i>. المطلوب: حدّد بدقة المدخل المنهاجي المعتمد لمعالجة هذا الإشكال، وشخّص العائق الإبستمولوجي الكامن وراء سؤال التلميذ، وميّز بين تدخلك الديداكتيكي وتدخلك البيداغوجي.»</div>
+      <h4 class="mini-h">كيف يوظف الأستاذ المكوّن نتائج التحليل الآلي؟</h4>
+      <ul class="ticks">
+        <li><b>تجاوز التمهيد النظري العام:</b> يدخل المكوّن القاعة ومعه خريطة دقيقة لمكامن الخلط لدى فوجه، فتتحول الحصة النظرية إلى معالجة بؤرية.</li>
+        <li><b>تشكيل مجموعات الورشات:</b> توزيع الطلبة داخل الورشات التطبيقية بناءً على نوع التعثر المرصود.</li>
+        <li><b>نقل التجربة للقسم الثانوي:</b> يتدرب الطالب الأستاذ على الآلية نفسها عبر رمز QR Code في بداية حصته بالثانوي التأهيلي لربح 15 دقيقة.</li>
+      </ul>
+    </div>
+    <div class="card">
+      <div class="cardhead"><h3>لوحة مؤشرات القاعة الآنية (Analytics)</h3><span class="chip gold" id="partic">نسبة المشاركة: 100% (30/30)</span></div>
+      <p class="muted">نتائج الفرز اللغوي الدلالي لاستجابات الطلبة الأساتذة قبل انطلاق الحصة الحضورية:</p>
+      <div class="abar r"><div><span>خلط بين المفهوم البيداغوجي والديداكتيكي</span><b id="a1">65% (19 طالباً)</b></div><i><em style="width:65%"></em></i></div>
+      <div class="abar o"><div><span>قصور في تحديد العائق الإبستمولوجي بدقة</span><b id="a2">25% (8 طلاب)</b></div><i><em style="width:25%"></em></i></div>
+      <div class="abar g"><div><span>تشخيص ديداكتيكي وشرعي موفق</span><b id="a3">10% (3 طلاب)</b></div><i><em style="width:10%"></em></i></div>
+      <div class="tiles3"><div class="t r"><b>65%</b>خلط مفاهيمي</div><div class="t o"><b>25%</b>قصور في العائق</div><div class="t g"><b>10%</b>تشخيص موفق</div></div>
+      <details class="model-ans"><summary>نموذج التوجيه التصحيحي للمكوّن</summary>
+        <p><b>إجابة تكشف الخلط:</b> «أشرح للتلميذ حكم الزكاة وأبيّن عقوبة مانعها، وأطلب منه احترام الشرع» ← خلط بين الوعظ والمعالجة، ولا تشخيص للعائق.</p>
+        <p><b>إجابة موفقة:</b> المدخل: <b>الاستجابة</b>. العائق: تصوّر فرداني مطلق للملكية يتوهم تعارضاً بين الحرية الاقتصادية والوظيفة الاجتماعية والتعبدية للزكاة. التدخل الديداكتيكي: بناء وضعية تستثمر مفهوم «الاستخلاف في المال». التدخل البيداغوجي: تدبير الحوار وإشراك القسم دون مصادرة حق التلميذ في السؤال.</p>
+      </details>
+    </div>
+  </div>
+  <h3 class="sub-h">مسار ما بعد التشخيص القبلي: مراحل الحصة التكوينية الموالية <span class="chip">عملي – نظري – عملي</span></h3>
+  <div class="phases">
+    <div class="ph"><span class="pn">1</span><span class="pt">15–20 د</span><h4>استثمار نتائج التشخيص ومواجهة الفوج</h4><p>عرض لوحة المؤشرات (دون ذكر الأسماء) لخلق صراع معرفي ومهني يُشعر الطلبة بالحاجة للتكوين ويختزل زمن التمهيد التقليدي.</p></div>
+    <div class="ph"><span class="pn">2</span><span class="pt">30–40 د</span><h4>التنظير البؤري الموجّه (Micro-Lecturing)</h4><p>الاستغناء عن المحاضرة العامة، وتركيز التدخل النظري حصراً على مكامن الضعف والعوائق التي كشفتها الاستمارة.</p></div>
+    <div class="ph"><span class="pn">3</span><span class="pt">90–110 د</span><h4>الورشة التطبيقية ومختبر المعالجة الذكية</h4><p>وضعيات مهنية مكثفة تعالج العوائق المرصودة، وتمرير الإنتاجات عبر «المصفي الديداكتيكي الذكي» مع تأطير المكوّن.</p></div>
+    <div class="ph"><span class="pn">4</span><span class="pt">30–45 د</span><h4>التقويم البعدي والترصيد في E-Portfolio</h4><p>مقارنة الأداء البعدي بنتائج الاستمارة لقياس <b>نماء الكفاية المهنية</b> (25% مراقبة مستمرة)، وإيداع المنتوج المصحح وتحديد أنشطة الدعم.</p></div>
+  </div>
+</div></section>
+
+<!-- 6 MUSAFFI -->
+<section class="sec slide" id="musaffi"><div class="wrap">
+  <div class="sec-head"><span class="sec-num">06</span><h2>المصفي الديداكتيكي الذكي <small class="en">Didactic Micro-Feedback Filter</small></h2><p>مختبر النقد الديداكتيكي الآني (المحطة الرابعة): فحص وتصفية فورية لإنتاجات الطلبة الأساتذة عبر 4 مرشحات ديداكتيكية وشرعية مضبوطة بالمقرر 24-053 ومنهاج 2016.</p></div>
+  <div class="samples"><button class="smp on" data-s="0">عيّنة 1: الأمانة (1 باك – القسط)</button><button class="smp" data-s="1">عيّنة 2: الإيمان والعلم (1 باك – التزكية)</button></div>
+  <div class="fgrid">
+    <div class="card draft">
+      <div class="cardhead"><h3>مسودة الطالب الأستاذ (المدخلات)</h3><span class="chip">مدخلات الورشة</span></div>
+      <div class="fields"><div><small>السلك والمستوى</small><b id="fLvl"></b></div><div><small>المدخل المنهاجي (2016)</small><b id="fMad"></b></div></div>
+      <div class="field"><small>السند الشرعي الموثق من مصفوفة المنهاج (يُمنع التوليد الآلي)</small><b id="fSanad"></b></div>
+      <div class="field"><small>نص مسودة الوضعية المشكلة والمهام المقترحة</small><p id="fDraft" class="draftTxt"></p></div>
+      <button class="btn teal" id="runFilter" style="width:100%;justify-content:center">🪄 تشغيل المصفي الديداكتيكي الذكي</button>
+      <p class="note">⏱ الفحص الأولي في ثوانٍ بدل 90 دقيقة · المخرجات مسودات يصادق عليها الأستاذ المكوّن.</p>
+    </div>
+    <div class="card report">
+      <div class="cardhead"><h3>تقرير المصفي والتغذية الراجعة الدقيقة</h3></div>
+      <div id="fWait" class="wait">اضغط «تشغيل المصفي» لعرض نتائج المرشحات الأربعة.</div>
+      <div id="fOut" hidden></div>
+    </div>
+  </div>
+</div></section>
+
+<!-- 7 MUHAKI -->
+<section class="sec slide" id="muhaki"><div class="wrap">
+  <div class="sec-head"><span class="sec-num">07</span><h2>محاكي المواقف الصفية والتمثلات <small class="en">Role-Play Simulator</small></h2><p>المحطتان الثالثة والسادسة: تدريب تفاعلي على تشخيص عوائق المتعلمين المراهقين وتدبير التعاقد الديداكتيكي دون انزلاق نحو الجدال العقيم أو الإفتاء.</p></div>
+  <div class="samples"><button class="scn on" data-s="0">سيناريو 1: فقه العبادات – الزكاة (جذع مشترك)</button><button class="scn" data-s="1">سيناريو 2: الإيمان والعلم (أولى باك)</button></div>
+  <div class="fgrid">
+    <div class="card simc">
+      <div class="cardhead"><h3 id="sTitle"></h3><span class="chip">محاكاة تفاعلية</span></div>
+      <div class="chat" id="sChat"></div>
+      <div class="lbl" style="margin-top:12px">اختر استراتيجية التدخل الديداكتيكي المناسبة:</div>
+      <div class="opts" id="sOpts"></div>
+    </div>
+    <div class="card">
+      <div class="cardhead"><h3>لوحة التشخيص الديداكتيكي والتغذية الراجعة</h3></div>
+      <div class="obst"><b>العائق الإبستمولوجي / التصوري الكامن:</b><p id="sObst"></p></div>
+      <div class="sfb" id="sFb"><b>بانتظار اختيارك لأحد التدخلات الصفية…</b><p>اختر إحدى صيغ التدخل لمعاينة أثرها على بناء المفهوم وتصحيح تمثل المتعلم.</p></div>
+      <div class="obst gold"><b>القيمة التكوينية للمحاكي (المحطة 6):</b><p>يُدرّب الطالب الأستاذ على التمييز بين «الوعظ التقريري» الذي يُسكت السؤال دون معالجة، و«التدخل الديداكتيكي المقاصدي» الذي يبني الاقتناع وفق منهاج 2016.</p></div>
+    </div>
+  </div>
+</div></section>
+
+<!-- 8 NAMUDHAJ -->
+<section class="sec slide" id="namudhaj"><div class="wrap">
+  <div class="sec-head"><span class="sec-num">08</span><h2>نموذج تطبيقي: حصة تكوينية رقمية مصغرة</h2><p>«منظومة القيم في منهاج التربية الإسلامية»: تحليل القيمة المركزية والقيم الناظمة انطلاقاً من وضعية مهنية.</p></div>
+  <div class="model">
+    <div>
+      <div class="shot"><img src="assets/hissa.jpg" alt="لقطة من فيديو الوضعية المهنية"><span class="badge">فيديو الوضعية · 60 ثانية</span></div>
+      <div class="minis"><img src="assets/grade.jpg" alt="ورقة اختبار عليها 8/20"><img src="assets/page8.jpg" alt="الصفحة 8 من منهاج التربية الإسلامية" style="object-fit:cover;object-position:center 55%;aspect-ratio:16/9"></div>
+    </div>
+    <div>
+      <p style="margin-top:0">حصة من 30 دقيقة يقودها الأستاذ المكوّن، سندها درس «حق الله: الوفاء بالأمانة والمسؤولية» (الأولى باكالوريا، مدخل القسط)، ومرجعها الرسمي الصفحتان 8 و22 من منهاج 2016. تندرج ضمن <b>المحطة 5</b> (ديداكتيك التربية الإسلامية ومكونات المنهاج).</p>
+      <div class="steps4">
+        <div><b>01 · الوضعية المهنية</b><br>فيديو قصير وتفاعل أولي</div>
+        <div><b>02 · الخريطة الرسمية</b><br>التوحيد والقيم الناظمة الأربع</div>
+        <div><b>03 · ورشة التحليل</b><br>أحكام معللة وربط بالدرس</div>
+        <div><b>04 · التقويم الرقمي</b><br>تصحيح آلي وتقويم بشري</div>
+      </div>
+      <p class="note" style="margin:0 0 14px">توظيف الذكاء الاصطناعي: إنتاج الوضعية المصورة بأدوات توليد الفيديو والصوت، وبرمجة التطبيق التفاعلي، مع مراجعة بشرية لكل المخرجات. شخصيات الفيديو أساتذة في قاعة الأساتذة، دون أي تجسيد ممنوع.</p>
+      <div style="display:flex;gap:10px;flex-wrap:wrap">
+        <a class="btn teal" href="https://ouchikhlabs.github.io/basira-qiyam/" target="_blank" rel="noopener">فتح الحصة التفاعلية ↗</a>
+        <a class="btn" style="background:var(--gold-soft);color:#5c430c" href="https://ouchikhlabs.github.io/basira-qiyam/#stage-1" target="_blank" rel="noopener">مشاهدة الفيديو ↗</a>
+      </div>
+    </div>
+  </div>
+</div></section>
+
+<!-- 9 QIMA -->
+<section class="sec slide" id="qima"><div class="wrap">
+  <div class="sec-head"><span class="sec-num">09</span><h2>حوكمة الزمن التكويني وقابلية التطوير والتعميم</h2><p>كيف يحل المشروع معضلة الوعاء الزمني الضيق (34 ساعة) دون المساس بالبنية الرسمية للتكوين، وكيف يمتد لباقي الوحدات.</p></div>
+  <div class="grid g2">
+    <div class="card">
+      <h3>مقارنة استثمار زمن الورشة التطبيقية (24 ساعة)</h3>
+      <p class="muted">توزيع الجهد والوقت داخل الورشة قبل وبعد توظيف «المصفي الذكي» و«الاستمارات القبلية».</p>
+      <div class="cmp"><div class="cl"><span>التدبير التقليدي للورشة</span><b class="bad">40% ممارسة فعلية فقط</b></div>
+        <div class="sbar"><i style="width:40%;background:var(--deep)">40% نقاش وتطبيق</i><i style="width:60%;background:var(--gold);color:#2a1f05">60% إملاء وتصحيح يدوي مطوّل</i></div></div>
+      <div class="cmp"><div class="cl"><span>التدبير الذكي (المصفي والمحاكي)</span><b class="good">85% ممارسة ونقاش مقاصدي</b></div>
+        <div class="sbar"><i style="width:85%;background:var(--deep)">85% تحليل وممارسة وتأطير نوعي</i><i style="width:15%;background:var(--gold);color:#2a1f05">15% فرز آلي</i></div></div>
+      <div class="tiles2"><div class="t g"><b>90 د ← 30 ث</b>اختزال زمن الفحص الأولي لمسودات المجموعات بالمركز</div><div class="t o"><b>+15 دقيقة</b>ربح زمن التمهيد بالقسم الثانوي عبر استمارات QR Code</div></div>
+    </div>
+    <div class="card">
+      <h3>قابلية التطوير والتعميم (Scalability Roadmap)</h3>
+      <p class="muted">صُمّم النموذج ببنية معيارية (Modular Architecture) تجعله قابلاً للتوسع الأفقي والعمودي داخل المراكز الجهوية لمهن التربية والتكوين:</p>
+      <div class="road"><span>1</span><div><b>المرحلة الحالية (النموذج التطبيقي – وحدة الديداكتيك):</b> تفعيل الهندسة الثمانية، والمصفي الديداكتيكي للوضعيات، ومحاكي المواقف الصفية في وحدة ديداكتيك التربية الإسلامية (34 ساعة).</div></div>
+      <div class="road"><span>2</span><div><b>التعميم على مجزوءات التخصص (المقرر 24-053):</b> نسخ القالب الهندسي نفسه ليشمل تخطيط التعلمات (فحص الجذاذات)، وتدبير التعلمات 1 و2، وتقويم التعلمات (فحص الفروض وجداول التخصيص)، ووحدات دعم التكوين الأساس الثمانية.</div></div>
+      <div class="road"><span>3</span><div><b>التكامل الميداني وتتبع الملف التراكمي (E-Portfolio):</b> ربط إنتاجات الطلبة في الورشات بتقارير التداريب الميدانية (64 س + 64 س) بالمؤسسات التعليمية الثانوية.</div></div>
+    </div>
+  </div>
+  <div class="grid g2" style="margin-top:18px">
+    <div class="card"><div class="ic">🌉</div><h3>التجسير بين المعرفة الشرعية والممارسة الديداكتيكية</h3><p>تدريب الطالب الأستاذ عملياً على النقل الديداكتيكي وتنزيل القيمة المركزية (التوحيد) والقيم الناظمة (الحرية، المحبة، الاستقامة، الإحسان) في وضعيات تعلمية دالة للمراهق.</p></div>
+    <div class="card"><div class="ic">🏫</div><h3>التكامل العمودي: من المركز الجهوي إلى قسم الثانوي</h3><p>أدوات ينقلها الطالب الأستاذ مباشرة إلى القسم: استمارات QR Code لرصد تمثلات التلاميذ، ووضعيات بصرية رمزية، ومهام متدرجة للفروق الفردية، وشبكات تقويم تبادلي.</p></div>
+  </div>
+</div></section>
+
+<footer><div class="wrap">
+  <div>هندسة تكوين وحدة ديداكتيك التربية الإسلامية بتوظيف تقنيات الذكاء الاصطناعي · نموذج رقمي تفاعلي قابل للتطوير والتعميم</div>
+  <div>المرجعية: المقرر الوزاري 24-053 · منهاج التربية الإسلامية 2016 · جميع المخرجات مسودات تخضع لمصادقة الأستاذ المكوّن</div>
+</div></footer>
+
+<!-- station modal -->
+<div class="modal" id="stModal" hidden><div class="mbox" role="dialog" aria-modal="true">
+  <div class="mhead"><div><span class="chip gold" id="mMeta"></span><h3 id="mTitle"></h3></div><div class="mact"><button class="btn gold sm" id="mPrint">🖨 طباعة / PDF</button><button class="mx" id="mClose" aria-label="إغلاق">✕</button></div></div>
+  <div class="mbody" id="mBody"></div>
+</div></div>
+
+<!-- charter modal -->
+<div class="modal" id="chModal" hidden><div class="mbox small" role="dialog" aria-modal="true">
+  <div class="mhead"><h3>🛡 ميثاق الضوابط الشرعية والبيداغوجية للمشروع</h3><button class="mx" data-close aria-label="إغلاق">✕</button></div>
+  <div class="mbody">
+    <div class="el r1"><b>1. المنع القطعي لتوليد النصوص الشرعية آلياً</b><p>لا يُسمح لنماذج الذكاء الاصطناعي بإنشاء أو إكمال أي نص قرآني أو حديثي. تُستدعى النصوص حصراً من قاعدة بيانات موثقة مأخوذة حرفياً من منهاج التربية الإسلامية (2016) برواية ورش عن نافع.</p></div>
+    <div class="el r2"><b>2. ضوابط الوضعيات المصورة والتمثيل البصري</b><p>يُمنع منعاً كلياً تجسيد الذات الإلهية، والملائكة، والأنبياء والرسل، والصحابة، وآل البيت، والأئمة والعلماء، والغيبيات، أو تشخيص العقائد في رسوم أو صور. وتُحصر الصور في المشاهد الواقعية الرمزية المعاصرة للتلاميذ والأسرة والبيئة.</p></div>
+    <div class="el r3"><b>3. المرجعية المذهبية والرقابة البشرية</b><p>يلتزم النظام بالثوابت الدينية المغربية (العقيدة الأشعرية، والمذهب المالكي، والتصوف السني، وإمارة المؤمنين)، ويخضع كل مخرج للمصادقة العلمية للأستاذ المكوّن قبل اعتماده.</p></div>
+    <button class="btn teal" data-close style="margin-top:6px">فهمت، إغلاق</button>
+  </div>
+</div></div>
+
+<div class="pbar" id="pbar">
+  <button id="pExit">✕ خروج</button>
+  <button id="pPrev">→ السابق</button>
+  <div class="dots" id="pDots"></div>
+  <button id="pNext">التالي ←</button>
+  <span class="timer" id="pTimer" title="اضغط لإيقاف/استئناف العد">10:00</span>
+</div>
+
+<script>
+const LBL=["عنوان المحطة ومحورها","المدة الزمنية وصيغتها","المرجع في التوصيف الوزاري","الكفاية المستهدفة","الأهداف الإجرائية","المعارف القبلية المستلزمة","الوسائل والموارد التكوينية","وضعية الانطلاق","مراحل الاشتغال وتوزيع الزمن بالدقائق","أنشطة الأستاذ المكوّن","أنشطة الطلبة الأساتذة","أسئلة التوجيه والمناقشة","الورشة التطبيقية وتعليماتها","المنتوجات المنتظرة","كيفية توظيف تقنيات الذكاء الاصطناعي (وفق الضوابط)","أدوات التقويم والتغذية الراجعة","أنشطة الدعم والمعالجة","المراجع العلمية والبيداغوجية"];
+const P="براديغم: عملي - نظري - عملي";
+const ST=[
+{n:1,t:"مدخل إلى الديداكتيك",d:"تحديد موقع وحدة ديداكتيك التربية الإسلامية ضمن هندسة التكوين الأساس، والتمييز بين الديداكتيك والبيداغوجيا وعلوم التربية.",h:"2 س دروس + 2 س تطبيق",k:"mix",
+e:["مدخل إلى الديداكتيك – المحور الأول: التأطير المفاهيمي والإبستمولوجي للوحدة","4 ساعات (240 دقيقة): 2 س دروس + 2 س تطبيق – "+P,
+"المقرر الوزاري رقم 24-053 (22 يونيو 2024): محور مدخل إلى الوحدة (موقع الوحدة، أهميتها، تاريخ الديداكتيك ومجالاته).",
+"تحديد موقع وحدة ديداكتيك التربية الإسلامية ضمن هندسة التكوين الأساس، والتمييز بين الديداكتيك والبيداغوجيا وعلوم التربية.",
+["تعرّف سياق نشأة الديداكتيك وتطوره.","استخلاص الفروق الدقيقة بين الديداكتيك والبيداغوجيا.","تحليل أقطاب المثلث الديداكتيكي في درس التربية الإسلامية."],
+"المعارف العامة في علوم التربية والفلسفة التربوية، والاطلاع الأولي على المقرر الوزاري 24-053.",
+"المقرر الوزاري 24-053، منهاج التربية الإسلامية (2016)، الاستمارة التشخيصية القبلية، خريطة مفاهيمية تفاعلية.",
+"عرض خطاطتين متناقضتين لعلاقة الديداكتيك بالبيداغوجيا، ومطالبة الطلبة بتحديد الخلل المفاهيمي في ضوء المقرر الرسمي.",
+[[30,"استثمار نتائج الاستمارة التشخيصية القبلية ورصد الخلط المفاهيمي."],[60,"تنظير بؤري حول نشأة الديداكتيك ومجالاته والمثلث الديداكتيكي."],[110,"ورشة تحليل الوثائق التنظيمية ومقارنة المفاهيم."],[40,"تقاسم الإنتاجات وتوليف تركيبي."]],
+"عرض لوحة مؤشرات التشخيص القبلي، وتأطير الفروق المفاهيمية، وتوجيه مجموعات تحليل الوثائق الرسمية.",
+"تحليل بطاقات توصيف الوحدات، وبناء جدول مقارن بين علوم التربية والديداكتيك، وإنتاج خريطة مفاهيمية.",
+["لماذا أُدرجت وحدة ديداكتيك المادة في الفترة الأولى بالتوازي مع علوم التربية؟","كيف يتجلى القطب المعرفي في المثلث الديداكتيكي داخل مادة التربية الإسلامية؟"],
+"تحليل مقتطفات من المقرر 24-053 ومنهاج 2016 لاستخراج تجليات أقطاب المثلث الديداكتيكي (المتعلم، المدرس، المعرفة الشرعية).",
+"جدول مقارن للمفاهيم + خريطة مفاهيمية رقمية لمجالات الديداكتيك.",
+"استمارة تشخيصية قبلية لرصد التمثلات حول مفهوم الديداكتيك + توليد خريطة مفاهيمية تفاعلية.",
+"شبكة تقييم الخرائط المفاهيمية + رائز تشخيص قبلي (مراقبة مستمرة).",
+"بطاقات مفاهيمية مركّزة للطلبة الذين يخلطون بين المقاربة البيداغوجية والمعالجة الديداكتيكية.",
+"المقرر الوزاري 24-053 (2024)؛ معجم علوم التربية؛ أدبيات الديداكتيك العام والخاص."]},
+{n:2,t:"العقد والنقل الديداكتيكي",d:"إعمال قواعد النقل الديداكتيكي السليم للانتقال من المعرفة الشرعية العالمة إلى المعرفة المدرسية دون إخلال بالمعنى أو القدسية.",h:"2 س دروس + 2 س تطبيق",k:"mix",
+e:["العقد والنقل الديداكتيكي – المحور الثاني: آليات تحويل المعرفة وتنظيم التفاعلات الصفية","4 ساعات (240 دقيقة): 2 س دروس + 2 س تطبيق – "+P,
+"المقرر 24-053: محور مفاهيم ديداكتيكية (العقد الديداكتيكي، النقل الديداكتيكي).",
+"إعمال قواعد النقل الديداكتيكي السليم للانتقال من المعرفة الشرعية العالمة إلى المعرفة المدرسية دون إخلال بالمعنى أو القدسية.",
+["ضبط مفهوم النقل الديداكتيكي وشروطه في العلوم الشرعية.","تشخيص مظاهر اختلال العقد الديداكتيكي داخل قسم التربية الإسلامية."],
+"التحكم في العلوم الشرعية (وحدات دعم التكوين الأساس) ومفهوم المثلث الديداكتيكي.",
+"أمهات كتب الفقه المالكي والأصول، الكتاب المدرسي للثانوي، المصفي الديداكتيكي الذكي.",
+"مقارنة نص أصولي حول «مقاصد الشريعة» بفقرة من كتاب التلميذ للثانية باكالوريا لاستخراج التحويلات التي طرأت على النص.",
+[[30,"تحليل وضعية الانطلاق ورصد مستويات النقل الديداكتيكي."],[60,"تأطير نظري حول النقل الديداكتيكي (شوفالار) والعقد الديداكتيكي (بروسو)."],[110,"ورشة تطبيقية في النقل الديداكتيكي وفحصها بالمصفي الذكي."],[40,"تقويم وتغذية راجعة."]],
+"تقديم نماذج للنقل الديداكتيكي الموفق والمبتذل، وتأطير ضوابط صون المعنى الشرعي.",
+"مقارنة معالجة مبحث «مقاصد الشريعة» في كتاب أصولي بمقرر الثانية باكالوريا، وإعادة صياغة نشاط تعلمي.",
+["ما الحدود الفاصلة بين تبسيط المعرفة الشرعية وبين ابتذالها أو تحريفها؟","كيف يؤدي غموض العقد الديداكتيكي إلى فشل الوضعية التقويمية؟"],
+"إعادة صياغة نص فقهي/أصولي (من مدخل الاستجابة) ليناسب المستوى الإدراكي لتلاميذ الثانوي دون تبسيط مخل، وفحصه عبر المصفي.",
+"بطاقة مقارنة في النقل الديداكتيكي + ميثاق التعاقد الديداكتيكي للحصة.",
+"استعمال «مصفي النقل الديداكتيكي» لفحص مستوى تبسيط اللغة الأكاديمية ومدى ملاءمتها للفئة العمرية.",
+"شبكة فحص سلامة النقل الديداكتيكي (الدقة الشرعية + الملاءمة الإدراكية).",
+"نماذج مقارنة محللة في النقل الديداكتيكي لمدخلي التزكية والاستجابة.",
+"Yves Chevallard, La transposition didactique؛ منهاج التربية الإسلامية (2016)."]},
+{n:3,t:"التمثلات والعوائق الديداكتيكية",d:"تشخيص تمثلات المتعلمين المراهقين ورصد العوائق الإبستمولوجية والقيمية، وبناء استراتيجيات ديداكتيكية لتجاوزها.",h:"2 س دروس + 2 س تطبيق",k:"mix",
+e:["التمثلات والعوائق الديداكتيكية – المحور الثالث: تشخيص التصورات القبلية وبناء استراتيجيات المعالجة","4 ساعات (240 دقيقة): 2 س دروس + 2 س تطبيق – "+P,
+"المقرر 24-053: محور مفاهيم ديداكتيكية (التمثلات، العائق) + منهاج 2016 (تشخيص التمثلات وتعديلها).",
+"تشخيص تمثلات المتعلمين المراهقين ورصد العوائق الإبستمولوجية والقيمية، وبناء استراتيجيات ديداكتيكية لتجاوزها.",
+["التمييز بين الخطأ العابر والعائق الإبستمولوجي.","تصنيف تمثلات المراهقين حول قضايا العقيدة والعبادات والقيم."],
+"علم نفس المراهق (وحدة علوم التربية)، ومباحث العقيدة والفكر الإسلامي المعاصر.",
+"بطاقات إجابات تلاميذ افتراضيين، محاكي المواقف الصفية، استمارات QR Code.",
+"عرض 3 إجابات حقيقية لتلاميذ حول علاقة الإيمان بالعلم، ومطالبة الطلبة بتحديد منطق التفكير الكامن خلف كل خطأ.",
+[[30,"تحليل بطاقات إجابات تلاميذ افتراضيين."],[60,"تأطير نظري حول التمثلات والعوائق الإبستمولوجية (باشلار)."],[110,"ورشة تشخيص ومعالجة عبر محاكي المواقف الصفية."],[40,"تقاسم خطط المعالجة."]],
+"تزويد الطلبة ببطاقات تمثلات حقيقية وافتراضية، وتوجيه بناء خطط المعالجة الديداكتيكية.",
+"تشخيص نوع العائق في إجابات تلاميذ الثانوي التأهيلي، وتجريب التدخل عبر المحاكي.",
+["لماذا يُعدّ تجاهل تمثلات المراهق في درس العقيدة سبباً في انفصام المعرفة عن السلوك؟"],
+"الاشتغال على «محاكي المواقف الصفية» لرصد تمثلات تلاميذ الجذع المشترك (الزكاة) والأولى باكالوريا (الإيمان والعلم).",
+"بطاقة تشخيص العوائق + سيناريو تدخل ديداكتيكي معلل.",
+"محاكي التمثلات والمواقف الصفية (Role-Play) + استمارات QR Code لرصد التمثلات.",
+"شبكة تحليل التمثلات + تقرير التغذية الراجعة للمحاكي.",
+"دليل تصنيف العوائق الديداكتيكية الشائعة في تدريس التربية الإسلامية.",
+"Gaston Bachelard؛ منهاج التربية الإسلامية (2016)، ص 6."]},
+{n:4,t:"الوضعيات الديداكتيكية (المشكلة – البنائية – التقويمية)",d:"تصميم وتحليل وضعيات ديداكتيكية وظيفية ودالة، ومطابقتها للمداخل الخمسة والقيم الناظمة باستثمار المصفي الديداكتيكي.",h:"4 ساعات و20 دقيقة تطبيقية",k:"app",live:"#musaffi",min:260,
+e:["الوضعيات الديداكتيكية (المشكلة – البنائية – التقويمية) – المحور الرابع: هندسة الوضعيات التعليمية التعلمية والتقويمية","260 دقيقة (4 ساعات و20 دقيقة) تطبيقية – "+P,
+"المقرر الوزاري رقم 24-053 (22 يونيو 2024)، وحدة ديداكتيك التربية الإسلامية – محور: الوضعيات الديداكتيكية + منهاج التربية الإسلامية (يونيو 2016).",
+"في نهاية المحطة، يصبح الطالب الأستاذ قادراً على تصميم وتحليل وضعيات ديداكتيكية (مشكلة، بنائية، تقويمية) وظيفية ودالة في مادة التربية الإسلامية، ومطابقتها للمداخل الخمسة والقيم الناظمة، باستثمار الذكاء الاصطناعي (المصفي الديداكتيكي).",
+["التمييز الدقيق بين وظائف وخصائص كل من الوضعية المشكلة، والوضعية البنائية، والوضعية التقويمية.","صياغة وضعية مشكلة مركبة تستجيب لشروط النقل الديداكتيكي السليم وخصوصية مداخل التربية الإسلامية.","توظيف «المصفي الديداكتيكي الذكي» في نقد وتجويد الوضعيات المهنية وتكييفها حسب مستويات الإطار المرجعي."],
+"الجهاز المفاهيمي للديداكتيك (النقل الديداكتيكي، التعاقد، التمثلات، العائق)؛ مكونات منهاج التربية الإسلامية (المداخل الخمسة، القيمة المركزية والقيم الناظمة)؛ التحكم في النصوص الشرعية المقررة.",
+"وثيقة المنهاج (2016)، الأطر المرجعية للامتحانات، أداة «المصفي الديداكتيكي الذكي»، بطاقات الورشات.",
+"عرض كبسولة فيديو قصيرة لممارسة صفية غير موفقة في مدخل درس «الإيمان والعلم» (أولى باك)، ومطالبة الطلبة بتشخيص الخلل الديداكتيكي وشروط تحويل النص إلى وضعية مشكلة.",
+[[20,"وضعية الانطلاق (تشخيص الخلل في مدخل درس تقليدي)."],[30,"الاستكشاف والتشخيص القبلي (استعراض لوحة مؤشرات الاستمارة القبلية حول الخلط بين أنواع الوضعيات)."],[40,"التنظير البؤري (خريطة مفاهيمية تفاعلية للتمييز الوظيفي بين الوضعيات الثلاث + نشاط تصنيف رقمي)."],[110,"الورشة التطبيقية – مختبر النقد الديداكتيكي الآني (صياغة وضعية مشكلة وبنائية وتمريرها عبر المصفي الذكي)."],[60,"التقاسم والتقويم التبادلي وإيداع المنتوج في الملف التراكمي الرقمي (E-Portfolio)."]],
+"يعرض نتائج الاستمارة القبلية، ويؤطر المقارنة الوظيفية بين الوضعيات، ويشرف على تمرير إنتاجات المجموعات عبر «المصفي الديداكتيكي الذكي»، ويتدخل للتأطير النوعي ومناقشة الدقة الشرعية والمقاصدية.",
+"يناقشون لوحة المؤشرات، ويصنفون نماذج وضعيات، ويصممون في مجموعات من 4 وضعية مشكلة + وضعية بنائية لدرس من الثانوي التأهيلي، ويمررونها في المصفي الذكي، ويعدلونها وفق التغذية الراجعة.",
+["كيف نضمن ألا تتحول الوضعية المشكلة في التربية الإسلامية إلى مجرد قصة وعظية تفقد طابعها الإشكالي؟","ما الفرق الجوهري بين صياغة وضعية لبناء مفهوم عقدي وصياغتها لتقويم سلوك قيمي؟"],
+"في مجموعات من 4 طلبة: اختيار درس من برنامج الأولى أو الثانية باكالوريا (وفق المداخل الخمسة)، ثم: (1) صياغة وضعية مشكلة من واقع المراهق مرتبطة بسند شرعي موثق من المنهاج؛ (2) تفريعها إلى وضعية بنائية بـ 3 مهام متدرجة (استخراج، تحليل، تركيب)؛ (3) إخضاع المنتوج لـ«المصفي الديداكتيكي الذكي» وتعديل الثغرات.",
+"بطاقة وضعية مشكلة + وضعية بنائية مصححة ومصادق عليها رقمياً + تقرير الفحص الذكي مرفق بالملف التراكمي للطالب الأستاذ.",
+["قبل الحصة: تحليل ردود الاستمارة القبلية + كبسولة الفيديو التمهيدية.","أثناء الحصة: تشغيل «المصفي الديداكتيكي الذكي» لتقليص زمن التصحيح الأولي من 90 دقيقة إلى 30 ثانية لكل مجموعة.","بعد الحصة: توليد وضعيات دعم ومعالجة فردية."],
+"تقويم تشخيصي (الاستمارة القبلية) + تقويم تكويني (مؤشرات المصفي الأربعة) + شبكة التقويم التبادلي بين المجموعات المحتسبة ضمن 25% مراقبة مستمرة.",
+"الطلبة الذين أظهر تقرير المصفي لديهم تعثراً في النقل الديداكتيكي أو بناء العائق يُحالون على بنك الوضعيات المعيارية لإعادة صياغة وضعية موجّهة بمؤشرات مساعدة.",
+"المقرر الوزاري 24-053 (2024)؛ منهاج التربية الإسلامية (2016)؛ الأطر المرجعية للامتحانات؛ أدبيات الديداكتيك (بروسو، شوفالار)."]},
+{n:5,t:"ديداكتيك التربية الإسلامية ومكونات المنهاج",d:"تحليل هندسة منهاج التربية الإسلامية (2016) وإبراز العلاقات الوظيفية بين المداخل الخمسة والقيمة المركزية (التوحيد) والقيم الناظمة.",h:"4 ساعات تطبيقية",k:"app",
+e:["ديداكتيك التربية الإسلامية ومكونات المنهاج – المحور الخامس: خصوصية المادة وبنية المنهاج ومنظومة القيم","4 ساعات (240 دقيقة): 4 ساعات تطبيقية – "+P,
+"المقرر 24-053: محور ديداكتيك التربية الإسلامية (مفهوم المادة، مكونات المنهاج، القيمة المركزية والقيم الفرعية).",
+"تحليل هندسة منهاج التربية الإسلامية (2016) وإبراز العلاقات الوظيفية بين المداخل الخمسة والقيمة المركزية (التوحيد) والقيم الناظمة.",
+["استخراج خصوصية التربية الإسلامية كمادة دراسية.","رسم خريطة العلاقات بين القيمة المركزية (التوحيد) والقيم الناظمة (الحرية، المحبة، الاستقامة، الإحسان).","تنويع طرائق بناء الدروس حسب المداخل."],
+"الاطلاع الشامل على وثيقة منهاج التربية الإسلامية (يونيو 2016).",
+"منهاج التربية الإسلامية (يونيو 2016)، خطاطة القيم المركزية والناظمة، مصفوفات تحليل الوحدات.",
+"عرض وحدتين دراسيتين متباعدتين في المقرر، ومطالبة الطلبة باكتشاف الخيط الناظم الذي يربط السورة القرآنية بالمداخل الخمسة.",
+[[30,"تحليل تعريف التربية الإسلامية ومقاصدها الأربعة في المنهاج."],[90,"ورشة تفكيك المداخل الخمسة ونظام بناء الوحدات."],[80,"ورشة تحليل القيمة المركزية والقيم الفرعية والعلاقات بينها."],[40,"تقاسم وتوليف."]],
+"تأطير القراءة المنهاجية المتكاملة، ومنع تجزيء المادة أو عزل السورة القرآنية عن باقي المداخل.",
+"تحليل وحدة دراسية كاملة من برنامج الثانوي التأهيلي، واستخراج تمفصل دروسها حول السورة المؤطرة والقيمة المركزية.",
+["كيف تخدم مداخل الاقتداء والاستجابة والقسط والحكمة القيمةَ المركزية (التوحيد) في مدخل التزكية؟"],
+"تحليل وحدة دراسية من الأولى باكالوريا (سورة يوسف)، وإبراز كيف يخدم كل مدخل القيمة المركزية والقيم الناظمة الأربع.",
+"خريطة مفاهيمية لعلاقات القيم + بطاقة تحليل وحدة منهاجية.",
+"فحص توازن الأبعاد القيمية (المعرفي، الوجداني، السلوكي) في جذاذات الطلبة عبر المصفي الديداكتيكي.",
+"شبكة تحليل مكونات المنهاج وخرائط العلاقات القيمية.",
+"خطاطات توضيحية لهندسة المداخل الخمسة ومقاصد التربية الإسلامية الأربعة (الوجودي، الكوني، الحقوقي، الجودي).",
+"منهاج التربية الإسلامية لسلكي التعليم الثانوي الإعدادي والتأهيلي (يونيو 2016)، ص 7–10."]},
+{n:6,t:"تحليل الوضعيات التعليمية التعلمية",d:"تحليل المواقف الصفية في مادة التربية الإسلامية، وتشخيص المشكلات الديداكتيكية واتخاذ قرارات مهنية معللة.",h:"4 ساعات تطبيقية",k:"app",live:"#muhaki",
+e:["تحليل الوضعيات التعليمية التعلمية – المحور السادس: التبصر المهني واتخاذ القرار الديداكتيكي","4 ساعات (240 دقيقة): 4 ساعات تطبيقية – "+P,
+"المقرر 24-053: محور تحليل الوضعيات التعليمية التعلمية واستثمار المفاهيم في الممارسات المهنية.",
+"تحليل المواقف الصفية التعليمية التعلمية في مادة التربية الإسلامية، وتشخيص المشكلات الديداكتيكية واتخاذ قرارات مهنية معللة.",
+["رصد المؤشرات الديداكتيكية والبيداغوجية في ممارسة صفية.","تشخيص أسباب التعثر في تدبير الحوار والمناقشة القيمية.","اقتراح بدائل ديداكتيكية معللة."],
+"مجموع مكتسبات المحطات السابقة (العقد، التمثلات، الوضعيات، ومكونات المنهاج).",
+"مشاهد صفية مكتوبة ومصورة، شبكات ملاحظة الممارسات، محاكي المواقف الصفية التفاعلي.",
+"عرض نص تفريغ (Verbatim) لحوار صفي تعثّر فيه أستاذ متدرب أمام سؤال تلميذ حول الزكاة والملكية الفردية.",
+[[30,"عرض المشهد الصفي وأشكلته."],[90,"تحليل الممارسة عبر شبكات الملاحظة الديداكتيكية."],[80,"ورشة المحاكاة التفاعلية لاتخاذ القرار وتبريره."],[40,"توليف واستخلاص القواعد المهنية."]],
+"تقديم حالات صفية مركبة، وإدارة النقاش التبصري حول بدائل التدخل الديداكتيكي.",
+"تفريغ وتحليل مقطع صفي، وتشغيل «محاكي المواقف الصفية» لاتخاذ قرارات آنية وتبريرها.",
+["كيف نحافظ على حيوية النقاش الفكري في القسم دون السقوط في الجدال الكلامي العقيم؟"],
+"دراسة حالة صفية حول تدبير نقاش قيمي في درس «فقه العبادات: الزكاة» (جذع مشترك) و«الإيمان والعلم» (أولى باك)، وتحديد التدخل الأنسب.",
+"بطاقة تحليل الممارسة الصفية + تقرير التغذية الراجعة للمحاكي.",
+"تشغيل «محاكي المواقف الصفية» التفاعلي لتوليد ردود فعل متعلمين افتراضيين وتقييم قرارات الطالب الأستاذ.",
+"شبكة تحليل الممارسة الصفية + مؤشرات اتخاذ القرار الديداكتيكي.",
+"بنك الحالات المهنية المحللة في تدبير مقاطع دروس التربية الإسلامية.",
+"المقرر 24-053؛ دليل تحليل الممارسات المهنية بالمراكز الجهوية."]},
+{n:7,t:"الاستعمالات البيداغوجية للتكنولوجيا (TICE)",d:"إدماج تكنولوجيا المعلومات والاتصال والذكاء الاصطناعي المسؤول في تصميم موارد رقمية وظيفية تحترم قدسية المادة.",h:"4 ساعات تطبيقية",k:"app",
+e:["الاستعمالات البيداغوجية للتكنولوجيا (TICE) – المحور السابع: الرقمنة التربوية والضوابط الشرعية والأخلاقية","4 ساعات (240 دقيقة): 4 ساعات تطبيقية – "+P,
+"المقرر 24-053: محور الاستخدامات البيداغوجية لتكنولوجيا المعلومات والاتصالات والتدرب على أنشطة مدمجة.",
+"إدماج تكنولوجيا المعلومات والاتصال والذكاء الاصطناعي المسؤول في تصميم موارد رقمية وظيفية تحترم قدسية مادة التربية الإسلامية.",
+["تقويم الموارد الرقمية المتداولة في التربية الإسلامية علمياً وديداكتيكياً.","إنتاج مورد رقمي تفاعلي أو وضعية مصورة رمزية وفق الضوابط الشرعية."],
+"المبادئ الأساسية للمعلوميات، وميثاق الضوابط الشرعية والبيداغوجية للمشروع.",
+"أدوات إنتاج الاستمارات التفاعلية، نماذج الوضعيات المصورة الرمزية، ميثاق الضوابط الشرعية.",
+"عرض مورد رقمي متداول يتضمن أخطاء في الرسم القرآني وتجسيداً بصرياً غير منضبط، ومطالبة الطلبة بنقده.",
+[[40,"نقد موارد رقمية موجودة واستخراج معايير الجودة والقدسية."],[140,"ورشة إنتاج مورد رقمي مدمج في مقطع دراسي."],[60,"عرض الإنتاجات وتقويمها."]],
+"تأطير المعايير التقنية والشرعية لإنتاج الموارد الرقمية، والتحذير من مخاطر التوليد الآلي غير المنضبط.",
+"تصميم سيناريو لمورد رقمي تفاعلي (استمارة QR Code تشخيصية، خريطة مفاهيمية، أو وضعية بصرية رمزية).",
+["ما الضوابط الشرعية والمنهجية التي تحكم توظيف الصور والذكاء الاصطناعي في درس التربية الإسلامية؟"],
+"إنتاج بطاقة تقنية لمورد رقمي مدمج في درس من مداخل التربية الإسلامية، مع تطبيق ميثاق الضوابط الشرعية والبصرية.",
+"سيناريو مورد رقمي تفاعلي + بطاقة تقييم جودة المورد.",
+"التدرب العملي على التوظيف المسؤول للذكاء الاصطناعي في هندسة الأنشطة والتمارين التفاعلية.",
+"شبكة تقويم جودة الموارد الرقمية (الملاءمة الديداكتيكية، السلامة الشرعية، التفاعلية).",
+"دليل مختصر للأدوات الرقمية الموثوقة والموارد التربوية المفتوحة (REL).",
+"المقرر 24-053 (وحدتا الديداكتيك والتعلم الرقمي TICE)."]},
+{n:8,t:"التقويم والدعم والمعالجة",d:"تعبئة الموارد الديداكتيكية والمنهاجية المكتسبة لحل وضعية مهنية مركبة تغطي محاور الوحدة وتستجيب لشروط الإطار المرجعي.",h:"4 ساعات تقويم (12% من الوحدة)",k:"eval",
+e:["التقويم والدعم والمعالجة – المحور الثامن: التصديق الإجمالي وتقويم نماء الكفاية المهنية","4 ساعات (240 دقيقة): 4 ساعات تقويم (12% من الوحدة) – "+P,
+"المقرر 24-053 (المادة 4 وتوصيف الوحدة): مراقبة مستمرة (25%) واختبار نهاية الوحدة على شكل وضعية مركبة (75%).",
+"تعبئة كافة الموارد الديداكتيكية والمنهاجية المكتسبة لحل وضعية مهنية مركبة تغطي محاور الوحدة وتستجيب لشروط الإطار المرجعي.",
+["إنجاز تقويم إجمالي نهائي في صيغة وضعية مركبة.","تحليل النتائج وتقديم تغذية راجعة بنّاءة وخطط دعم ومعالجة."],
+"استيفاء جميع المحطات السبع السابقة، وإيداع منتوجات الورشات في الملف التراكمي الرقمي.",
+"موضوع اختبار نهاية الوحدة (وضعية مركبة)، شبكة التصحيح المعيارية، الملف التراكمي الرقمي.",
+"تقديم تعليمات اختبار نهاية الوحدة وشبكة معايير التصحيح والمصادقة وفق المادة 4 من المقرر الوزاري.",
+[[180,"تمرير اختبار نهاية الوحدة (وضعية مركبة) + استكمال تقييم الملف التراكمي."],[60,"التصحيح الجماعي والتغذية الراجعة الختامية وتحديد خطط الدعم."]],
+"إعداد الوضعية المركبة وشبكة التصحيح المعيارية، وتدبير التصحيح والتغذية الراجعة.",
+"إنجاز الوضعية المركبة فردياً، والمشاركة في جلسة التغذية الراجعة وتحديد حاجات الدعم.",
+["كيف نتحقق من قدرة الطالب الأستاذ على نقل مكتسباته الديداكتيكية إلى الممارسة المهنية في القسم؟"],
+"حل وضعية مهنية مركبة تتطلب: تشخيص عائق، وبناء وضعية مشكلة، وتخطيط مقطع تقويمي وفق الأطر المرجعية.",
+"إنجاز اختبار نهاية الوحدة + حصيلة الملف التراكمي الرقمي.",
+"استثمار شبكات التصحيح المعيارية، وتوليد خطط دعم ومعالجة فردية للمتعثرين.",
+"اختبار نهاية الوحدة (75%) + حصيلة المراقبة المستمرة (25%) وفق المادة 4 من المقرر 24-053.",
+"برمجة حصص الدعم والتصديق الاستدراكي للطلبة الذين حصلوا على معدل يقل عن 10/20.",
+"المقرر الوزاري 24-053 (المادة 4)؛ الأطر المرجعية للامتحانات."]}
+];
+
+const $=s=>document.querySelector(s), $$=s=>[...document.querySelectorAll(s)];
+const KC={mix:"#3a6fb0",app:"var(--teal2)",eval:"var(--gold)"};
+/* ---------- stations ---------- */
+$('#stgrid').innerHTML=ST.map((s,i)=>`<button class="stc" data-i="${i}">${s.live?'<span class="live">نموذج عرض حي</span>':''}<span class="no" style="background:${KC[s.k]}">المحطة ${s.n}</span><h4>${s.t}</h4><p>${s.d}</p><div class="ft"><span class="h">${s.h}</span><span class="o">البطاقة (18 عنصراً) ←</span></div></button>`).join('');
+function renderEl(i,v){
+  let body;
+  if(i===8) body='<ul class="tl">'+v.map(x=>`<li><em>${x[0]} د</em><span>${x[1]}</span></li>`).join('')+'</ul>';
+  else if(Array.isArray(v)) body=(i===4?'<ol>':'<ul>')+v.map(x=>`<li>${x}</li>`).join('')+(i===4?'</ol>':'</ul>');
+  else body=`<p>${v}</p>`;
+  const wide=[2,3,8,11,12,14].includes(i);
+  return `<div class="el k${i+1}${wide?' wide':''}"><b>${i+1}. ${LBL[i]}</b>${body}</div>`;
+}
+let lastFocus=null;
+function openModal(m){ lastFocus=document.activeElement; m.hidden=false; document.body.style.overflow='hidden'; const c=m.querySelector('.mx'); c&&c.focus(); }
+function closeModal(m){ m.hidden=true; if(!document.body.classList.contains('present')) document.body.style.overflow=''; lastFocus&&lastFocus.focus&&lastFocus.focus(); }
+function openStation(i){
+  const s=ST[i];
+  $('#mMeta').textContent=`المحطة التكوينية رقم ${s.n} · ${s.min||240} دقيقة · ${s.h}`;
+  $('#mTitle').textContent=s.t;
+  $('#mBody').innerHTML=s.e.map((v,k)=>renderEl(k,v)).join('')+(s.live?`<div class="el wide" style="text-align:center"><a class="btn teal" href="${s.live}" data-golive>تجريب الأداة الذكية لهذه المحطة ↓</a></div>`:'');
+  $('#mBody').scrollTop=0; openModal($('#stModal'));
+}
+$$('.stc').forEach(b=>b.onclick=()=>openStation(+b.dataset.i));
+$('#mClose').onclick=()=>closeModal($('#stModal'));
+$('#mBody').addEventListener('click',e=>{ const a=e.target.closest('[data-golive]'); if(!a) return; e.preventDefault(); closeModal($('#stModal')); const t=document.querySelector(a.getAttribute('href')); if(document.body.classList.contains('present')){ show(slides.indexOf(t)); } else t.scrollIntoView({behavior:'smooth'}); });
+$('#mPrint').onclick=()=>{ document.body.classList.add('printing'); setTimeout(()=>{ try{ window.print(); }catch(e){} document.body.classList.remove('printing'); },50); };
+
+$$('#chModal [data-close]').forEach(b=>b.onclick=()=>closeModal($('#chModal')));
+$$('.modal').forEach(m=>m.addEventListener('click',e=>{ if(e.target===m) closeModal(m); }));
+document.addEventListener('keydown',e=>{ if(e.key==='Escape'){ const m=$$('.modal').find(x=>!x.hidden); if(m){ e.stopImmediatePropagation(); closeModal(m); } } },true);
+
+/* ---------- diagnostic simulation ---------- */
+let dg={n:30,a:[19,8,3]};
+function drawDiag(){ const p=dg.a.map(x=>Math.round(x*100/dg.n));
+  ['a1','a2','a3'].forEach((id,k)=>{ $('#'+id).textContent=`${p[k]}% (${dg.a[k]} ${(dg.a[k]>=3&&dg.a[k]<=10)?'طلاب':'طالباً'})`; $('#'+id).closest('.abar').querySelector('em').style.width=p[k]+'%'; });
+  $$('.tiles3 .t b').forEach((b,k)=>b.textContent=p[k]+'%');
+  $('#partic').textContent=`نسبة المشاركة: 100% (${dg.n}/${dg.n})`; }
+$('#simResp').onclick=()=>{ const r=Math.random(), k=r<.45?0:r<.75?1:2; dg.a[k]++; dg.n++; drawDiag(); const b=$('#simResp'); b.textContent='✓ وردت إجابة جديدة وحُدّثت اللوحة'; setTimeout(()=>b.textContent='⚡ محاكاة ورود إجابة طالب',1600); };
+
+/* ---------- didactic filter ---------- */
+const FS=[
+{lvl:"الأولى باكالوريا",mad:"مدخل القسط",sanad:"سورة النساء: الآية 58 (رواية ورش عن نافع)",
+draft:"الأمانة خلق عظيم أمرنا الله به في القرآن الكريم. وقد كان النبي صلى الله عليه وسلم يُلقَّب بالصادق الأمين. في مجتمعنا اليوم نرى بعض الموظفين والتجار يغشون في عملهم ولا يؤدون الأمانة كما ينبغي، وهذا حرام شرعاً ويؤدي إلى فساد المجتمع. قال الله تعالى: ﴿إن الله يأمركم أن تؤدوا الأمانات إلى أهلها﴾.<br><b>المهمة:</b> عرّف الأمانة لغة واصطلاحاً، واذكر أنواعها.",
+res:[["warn","1. مصفي الملاءمة المنهاجية والقيمية (تعديل مطلوب)","الوضعية مرتبطة بمدخل القسط، لكنها أغفلت ربط قيمة «الوفاء بالأمانة» بالقيمة المركزية (التوحيد) والقيم الناظمة (الاستقامة، الإحسان). كما لم تستحضر الأبعاد الحقوقية الأربعة في المنهاج (حق الله، حق النفس، حق الغير، حق البيئة)."],
+["ok","2. مصفي الموثوقية الشرعية والنقل الديداكتيكي (مقبول)","السند الشرعي مستدعى حصراً من مصفوفة النصوص المعتمدة بالمنهاج (سورة النساء: 58 برواية ورش) دون توليد آلي، والمعنى الشرعي العام سليم."],
+["no","3. مصفي البنية الديداكتيكية للوضعية المشكلة (مرفوض – خطأ بنيوي)","النص صيغ بأسلوب وعظي تقريري يقدّم الحكم والحل مسبقاً («هذا حرام شرعاً ويؤدي إلى فساد المجتمع»)، والمهمة استرجاعية محضة («عرّف… واذكر») مما يلغي الحيرة المعرفية والعائق الديداكتيكي لدى المتعلم."],
+["no","4. مصفي التمثلات والفروق الفردية والضوابط البصرية (مرفوض)","السياق بعيد عن واقع التلميذ المراهق (يركز على التجار والموظفين فقط)، وتغيب عنه المهام المتدرجة وفق الإطار المرجعي (استخراج ← تحليل ← تركيب)."]],
+ctx:"أثناء استعدادكم لاجتياز الامتحان الجهوي، اقترح عليك صديقك في المجموعة الرقمية للقسم تقاسم أجوبة الامتحان عبر الهاتف بدعوى أن «التعاون في الامتحان نوع من التضامن ومساعدة الغير، وأن الأمانة تقتصر فقط على حفظ الودائع المالية وردّها لأصحابها»، مستدلاً بقوله تعالى: <span class=\"ayah\">﴿إن الله يأمركم أن تؤدوا الأمانات إلى أهلها﴾</span> [النساء: 58].",
+img:"مشهد حياتي رمزي معاصر لتلميذين في قاعة مراجعة مدرسية ينظران إلى هاتف ذكي بتعجب، مع رسم بياني لميزان القسط والأمانة (التزام بضوابط المنع القطعي لتجسيد الأنبياء والصحابة والغيبيات).",
+tasks:["<b>مستوى الفهم والاستخراج:</b> حدّد الإشكال المطروح في الوضعية، واستخرج التمثل الخاطئ لمفهوم الأمانة لدى صديقك.","<b>مستوى التحليل والاستنباط:</b> بيّن، انطلاقاً من السند الشرعي ومقاصد مدخل القسط، كيف يمس هذا السلوك بحق الله وحق النفس وحق الغير، مبرزاً علاقة الأمانة بقيمة الاستقامة.","<b>مستوى التركيب واتخاذ الموقف:</b> ضع موقفاً حجاجياً معللاً تُقنع به صديقك بتصحيح تصوره والالتزام بمقتضيات الأمانة العلمية."]},
+{lvl:"الأولى باكالوريا",mad:"مدخل التزكية",sanad:"سورة فاطر: الآية 28 (رواية ورش عن نافع)",
+draft:"العلم والإيمان متكاملان في الإسلام، قال تعالى: ﴿إنما يخشى الله من عباده العلماء﴾. وقد اهتم المسلمون بالعلوم فبرز علماء كبار في الطب والرياضيات والفلك، ولذلك فالإسلام دين العلم ولا تعارض بينه وبين العلم أبداً.<br><b>المهمة:</b> اذكر ثلاثة علماء مسلمين، وبيّن أن الإسلام دين العلم.",
+res:[["warn","1. مصفي الملاءمة المنهاجية والقيمية (تعديل مطلوب)","الوضعية مرتبطة بمدخل التزكية، لكنها لم تُبرز علاقة المعرفة بالقيمة المركزية (التوحيد)، ولا قيمة الحرية بوصفها قيمة ناظمة (حرية التفكير والبحث والتساؤل)."],
+["ok","2. مصفي الموثوقية الشرعية والنقل الديداكتيكي (مقبول)","السند الشرعي مستدعى من مصفوفة النصوص المعتمدة (سورة فاطر: 28 برواية ورش) دون توليد آلي، والمعنى العام سليم."],
+["no","3. مصفي البنية الديداكتيكية للوضعية المشكلة (مرفوض – خطأ بنيوي)","الوضعية تقريرية تعلن الخلاصة مسبقاً («لا تعارض بينه وبين العلم أبداً») فلا يبقى إشكال يُبنى، والمهمة استرجاعية («اذكر… وبيّن») لا تستدعي التحليل أو الحجاج."],
+["warn","4. مصفي التمثلات والفروق الفردية والضوابط البصرية (تعديل مطلوب)","تتجاهل التمثل الفعلي الشائع لدى المراهق: التعارض المتوهَّم بين التفسير العلمي للظواهر والإيمان؛ وتغيب المهام المتدرجة (استخراج ← تحليل ← تركيب)."]],
+ctx:"شاهدتَ مع صديقك مقطعاً على منصة تواصل يزعم صاحبه أن «التقدم العلمي يُغني عن الإيمان، وأن المؤمن لا يحتاج إلى البحث العلمي». احتار صديقك وسألك: هل عليّ أن أختار بين أن أكون مؤمناً أو أن أكون عالماً؟ فتذكرت قوله تعالى: <span class=\"ayah\">﴿إنما يخشى الله من عباده العلماء﴾</span> [فاطر: 28].",
+img:"مشهد رمزي لتلميذين في مختبر مدرسي يتأملان مجهراً وشاشة هاتف عليها علامة استفهام (دون أي تجسيد ممنوع).",
+tasks:["<b>مستوى الفهم والاستخراج:</b> حدّد الإشكال المطروح، واستخرج التمثل الكامن وراء حيرة صديقك.","<b>مستوى التحليل والاستنباط:</b> بيّن، انطلاقاً من السند الشرعي ومدخل التزكية، كيف يكون العلم طريقاً لتعميق الإيمان، وكيف يوجّه الإيمانُ العلمَ نحو النفع، مبرزاً صلة ذلك بقيمة الحرية.","<b>مستوى التركيب واتخاذ الموقف:</b> ركّب جواباً حجاجياً معللاً تردّ به على صاحب المقطع، مقترحاً سلوكاً مسؤولاً في التعامل مع المحتوى الرقمي."]}
+];
+let fsi=0;
+function loadSample(i){ fsi=i; const s=FS[i]; $('#fLvl').textContent=s.lvl; $('#fMad').textContent=s.mad; $('#fSanad').textContent=s.sanad; $('#fDraft').innerHTML=s.draft; $('#fOut').hidden=true; $('#fWait').hidden=false; $$('.smp').forEach((b,k)=>b.classList.toggle('on',k===i)); }
+function runFilter(){ const s=FS[fsi]; $('#fWait').hidden=true; const o=$('#fOut'); o.hidden=false;
+  o.innerHTML=s.res.map((r,k)=>`<div class="fres ${r[0]}" style="animation-delay:${k*.15}s"><b>${r[1]}</b>${r[2]}</div>`).join('')+
+  `<div class="better"><h4>النسخة المجوّدة المقترحة للوضعية (بعد التصفية) <span class="chip">مطابقة للمقرر 24-053 ومنهاج 2016</span></h4>
+   <div class="blk"><b>السياق والإشكال الديداكتيكي:</b><br>${s.ctx}</div>
+   <div class="blk img"><b>🖼 بطاقة السند البصري الرمزي المقترح (منضبط بالمحاذير الشرعية):</b><br>${s.img}</div>
+   <div class="blk"><b>المهام المتدرجة (بناءً وتقويماً وفق الإطار المرجعي):</b><ol style="margin:4px 0 0;padding-inline-start:20px">${s.tasks.map(t=>`<li>${t}</li>`).join('')}</ol></div>
+   <p class="note" style="margin:8px 0 0">↺ تبقى هذه النسخة مسودة يراجعها الأستاذ المكوّن ويصادق عليها قبل اعتمادها.</p></div>`; }
+$$('.smp').forEach(b=>b.onclick=()=>loadSample(+b.dataset.s));
+$('#runFilter').onclick=runFilter;
+loadSample(0);
+
+/* ---------- role-play simulator ---------- */
+const SC=[
+{title:"تلميذ افتراضي — الجذع المشترك",sub:"مدخل الاستجابة · درس: فقه العبادات (الزكاة)",
+q:"أستاذ، في درس اليوم حول فقه العبادات (الزكاة)، لدي سؤال صريح: أليس من حقي كإنسان حر أن أتصرف في مالي الذي تعبت في جمعه كما أشاء؟ لماذا يُلزمنا الشرع بإخراج الزكاة كأننا لا نملك أموالنا حقيقة؟",
+obst:"عائق تصوري/إبستمولوجي: اختزال مفهوم الملكية في الفردانية المطلقة، وتوهّم التعارض بين الحرية الاقتصادية للفرد وبين الوظيفة الاجتماعية والتعبدية للزكاة.",
+opts:[
+{l:"أ) التدخل الديداكتيكي المقاصدي (استثمار مفهوم الاستخلاف ومدخل الاستجابة)",ok:1,
+ me:"سؤالك وجيه، فلنفكر فيه معاً: هل أوجدنا المال من العدم؟ في المنهاج نتحدث عن «الاستخلاف»: الإنسان مستخلف في المال، يتصرف فيه بحرية مسؤولة، والزكاة من مظاهر هذه المسؤولية تجاه نفسه ومجتمعه.",
+ re:"فهمت الفكرة أستاذ! يعني أن المال في الأصل مال الله ونحن مستخلفون فيه، والزكاة تطهّر المال وتحقق التوازن في المجتمع.",
+ fb:["قرار ديداكتيكي موفق جداً","شخّصت العائق التصوري (مفهوم الملكية)، ونقلت التلميذ من التصور الفرداني الضيق إلى مفهوم «الاستخلاف في المال»، وربطت مدخل الاستجابة بالمقاصد الحقوقية والوجودية في المنهاج دون مصادرة حقه في السؤال."]},
+{l:"ب) الرد الوعظي التقريري (التخويف بالعقوبة الأخروية)",
+ me:"مانع الزكاة متوعَّد بالعقاب، فلا ينبغي أن تطرح مثل هذا السؤال؛ عليك أن تمتثل فقط.",
+ re:"(يصمت التلميذ… ويبقى مقتنعاً في داخله بأن الزكاة تُنقص من حريته.)",
+ fb:["قرار غير موفق","أسكت السؤال دون معالجة العائق؛ تحوّل التدخل إلى تخويف يعمّق الانفصام بين المعرفة والسلوك، ويخلّ بالعقد الديداكتيكي القائم على الحوار والإقناع."]},
+{l:"ج) قمع السؤال بدعوى الحفاظ على النظام الصفي",
+ me:"هذا ليس وقت الأسئلة الجانبية، لنكمل الدرس من فضلك.",
+ re:"(يتراجع التلميذ، وتنخفض مشاركة القسم في ما تبقى من الحصة.)",
+ fb:["قرار مرفوض مهنياً","مصادرة حق المتعلم في السؤال تُرسّخ العائق وتُفسد مناخ القسم؛ السؤال فرصة ديداكتيكية لبناء المفهوم، لا تهديد للنظام الصفي."]}]},
+{title:"تلميذة افتراضية — الأولى باكالوريا",sub:"مدخل التزكية · درس: الإيمان والعلم",
+q:"أستاذ، أستاذ الفيزياء يشرح لنا كيف تتكوّن الأمطار بأسباب علمية دقيقة، ونحن نقول في هذا الدرس إن الله هو الذي يُنزل المطر. أيّهما أصدّق؟ أليس العلم والدين متعارضين؟",
+obst:"عائق إبستمولوجي: الخلط بين مستوى تفسير «كيف» تحدث الظواهر (الأسباب الكونية) ومستوى «مَن ولماذا» (الخالق والغاية)، وتوهّم التعارض بين السببية العلمية والإيمان.",
+opts:[
+{l:"أ) التدخل الديداكتيكي: التمييز بين مستويات التفسير واستثمار مدخل التزكية",ok:1,
+ me:"لنفترض أن مهندساً شرح لك بدقة كيف يعمل محرك سيارة؛ هل يُلغي شرحه وجود من صمّمها؟ العلم يجيب عن «كيف» تحدث الظاهرة، والإيمان يجيب عن «مَن» أوجدها و«لماذا». فما رأيك الآن؟",
+ re:"إذن العلم يشرح كيف تحدث الأشياء، والإيمان يجيب عمّن أوجدها ولماذا… فهما متكاملان وليسا متعارضين!",
+ fb:["قرار ديداكتيكي موفق","ميّزت بين مستويات التفسير، وحوّلت التعارض المتوهَّم إلى تكامل، وربطت الدرس بمقصد التزكية دون مصادرة الفضول العلمي للمتعلمة."]},
+{l:"ب) الرد الجدالي (التقليل من قيمة العلم ووصفه بالقصور)",
+ me:"العلم يتغير كل يوم ولا يمكن الوثوق به، فلا تنشغلي بما يقوله أستاذ الفيزياء.",
+ re:"(تزداد حيرة التلميذة، وتشعر أنها مطالبة بالاختيار بين مادتين دراسيتين.)",
+ fb:["قرار غير موفق","يعمّق التعارض بدل معالجته، ويضع المتعلمة في صراع بين المواد الدراسية، ويخالف روح المنهاج القائمة على تكامل المعارف."]},
+{l:"ج) تأجيل السؤال وإحالته على أستاذ الفيزياء",
+ me:"هذا سؤال علمي، اطرحيه على أستاذ الفيزياء.",
+ re:"(تبقى التلميذة على تصورها، ويفوت القسم فرصة بناء المفهوم.)",
+ fb:["قرار غير موفق","تهرّب من مسؤولية ديداكتيكية؛ السؤال يمسّ صميم الدرس، وتأجيله يترك العائق قائماً."]}]}
+];
+let sci=0;
+function loadScn(i){ sci=i; const s=SC[i]; $$('.scn').forEach((b,k)=>b.classList.toggle('on',k===i));
+  $('#sTitle').innerHTML=`${s.title}<br><small style="font-family:Tajawal;font-size:14px;color:var(--muted)">${s.sub}</small>`;
+  $('#sChat').innerHTML=`<div class="msg ai"><b>سؤال المتعلم المراهق:</b><br>${s.q}</div>`;
+  $('#sObst').textContent=s.obst;
+  $('#sOpts').innerHTML=s.opts.map((o,k)=>`<button data-k="${k}">${o.l}</button>`).join('');
+  $('#sFb').className='sfb'; $('#sFb').innerHTML='<b>بانتظار اختيارك لأحد التدخلات الصفية…</b><p>اختر إحدى صيغ التدخل لمعاينة أثرها على بناء المفهوم وتصحيح تمثل المتعلم.</p>';
+  $$('#sOpts button').forEach(b=>b.onclick=()=>choose(+b.dataset.k)); }
+function choose(k){ const s=SC[sci], o=s.opts[k];
+  $$('#sOpts button').forEach((b,j)=>b.className=j===k?(o.ok?'ok':'no'):'');
+  $('#sChat').innerHTML=`<div class="msg ai"><b>سؤال المتعلم المراهق:</b><br>${s.q}</div><div class="msg tr"><b>تدخّلك كأستاذ متدرب:</b><br>${o.me}</div><div class="msg ai"><b>ردة فعل المتعلم في القسم:</b><br>${o.re}</div>`;
+  $('#sFb').className='sfb '+(o.ok?'ok':'no'); $('#sFb').innerHTML=`<b>${o.ok?'✔':'✖'} ${o.fb[0]}</b><p>${o.fb[1]}</p>`; }
+$$('.scn').forEach(b=>b.onclick=()=>loadScn(+b.dataset.s));
+loadScn(0);
+
+/* ---------- presentation mode ---------- */
+const slides=$$('.slide'); let cur=0, timer=null, left=600, running=false;
+slides.forEach((s,i)=>{ const d=document.createElement('i'); d.onclick=()=>show(i); $('#pDots').append(d); });
+function show(i){ cur=Math.max(0,Math.min(slides.length-1,i)); slides.forEach((s,k)=>s.classList.toggle('on',k===cur)); $$('#pDots i').forEach((d,k)=>d.classList.toggle('on',k===cur)); slides[cur].scrollTop=0; }
+function fmt(s){return String(Math.floor(s/60)).padStart(2,'0')+':'+String(s%60).padStart(2,'0');}
+function tick(){ if(left>0) left--; $('#pTimer').textContent=fmt(left); $('#pTimer').classList.toggle('warn',left<=60); }
+function startPres(){ document.body.classList.add('present'); show(0); left=600; $('#pTimer').textContent=fmt(left); clearInterval(timer); timer=setInterval(tick,1000); running=true; try{ document.documentElement.requestFullscreen&&document.documentElement.requestFullscreen().catch(()=>{}); }catch(e){} }
+function exitPres(){ document.body.classList.remove('present'); slides.forEach(s=>s.classList.remove('on')); clearInterval(timer); running=false; document.body.style.overflow=''; try{ document.fullscreenElement&&document.exitFullscreen(); }catch(e){} }
+$('#startPres').onclick=startPres; $('#pExit').onclick=exitPres;
+$('#pNext').onclick=()=>show(cur+1); $('#pPrev').onclick=()=>show(cur-1);
+$('#pTimer').onclick=()=>{ if(running){clearInterval(timer);running=false;} else {timer=setInterval(tick,1000);running=true;} };
+document.addEventListener('keydown',e=>{ if(!document.body.classList.contains('present')) return; if($$('.modal').some(m=>!m.hidden)) return;
+  if(['ArrowLeft','PageDown',' '].includes(e.key)){ e.preventDefault(); show(cur+1); }
+  if(['ArrowRight','PageUp'].includes(e.key)){ e.preventDefault(); show(cur-1); }
+  if(e.key==='Escape') exitPres(); });
+let tx=null,ty=null;
+document.addEventListener('touchstart',e=>{ if(!document.body.classList.contains('present')||$$('.modal').some(m=>!m.hidden)) return; tx=e.touches[0].clientX; ty=e.touches[0].clientY; },{passive:true});
+document.addEventListener('touchend',e=>{ if(tx===null) return; const dx=e.changedTouches[0].clientX-tx, dy=e.changedTouches[0].clientY-ty; if(Math.abs(dx)>60&&Math.abs(dx)>Math.abs(dy)*1.5){ dx>0?show(cur+1):show(cur-1); } tx=null; },{passive:true});
+
+</script>
+</body>
+</html>
