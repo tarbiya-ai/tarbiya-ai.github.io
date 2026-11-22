@@ -89,13 +89,13 @@
                     <i class="fa-solid fa-chart-pie w-5 text-center"></i><span>3. التشخيص القبلي الذكي</span></button>
                 <button type="button" onclick="switchTab('filter')" id="nav-filter" class="nav-btn w-full flex items-center justify-between px-3.5 py-3 rounded-xl text-right text-sm transition border border-goldWarm/40 cursor-pointer">
                     <span class="flex items-center gap-3"><i class="fa-solid fa-filter w-5 text-center"></i><span>4. المصفي الديداكتيكي الذكي</span></span>
-                    <span class="text-[10px] bg-goldWarm text-emeraldDeep font-bold px-2 py-0.5 rounded-full">عرض حي</span></button>
+                    <span class="text-[10px] bg-goldWarm text-emeraldDeep font-bold px-2 py-0.5 rounded-full whitespace-nowrap">عرض حي</span></button>
                 <button type="button" onclick="switchTab('simulator')" id="nav-simulator" class="nav-btn w-full flex items-center justify-between px-3.5 py-3 rounded-xl text-right text-sm transition cursor-pointer">
                     <span class="flex items-center gap-3"><i class="fa-solid fa-comments w-5 text-center"></i><span>5. محاكي المواقف الصفية</span></span>
-                    <span class="text-[10px] bg-emerald-100 text-emeraldDeep font-bold px-2 py-0.5 rounded-full">تفاعلي</span></button>
+                    <span class="text-[10px] bg-emerald-100 text-emeraldDeep font-bold px-2 py-0.5 rounded-full whitespace-nowrap">تفاعلي</span></button>
                 <button type="button" onclick="switchTab('session')" id="nav-session" class="nav-btn w-full flex items-center justify-between px-3.5 py-3 rounded-xl text-right text-sm transition cursor-pointer">
                     <span class="flex items-center gap-3"><i class="fa-solid fa-person-chalkboard w-5 text-center"></i><span>6. الحصة التكوينية التطبيقية</span></span>
-                    <span class="text-[10px] bg-blue-100 text-blue-800 font-bold px-2 py-0.5 rounded-full">نموذج منجز</span></button>
+                    <span class="text-[10px] bg-blue-100 text-blue-800 font-bold px-2 py-0.5 rounded-full whitespace-nowrap">نموذج منجز</span></button>
                 <button type="button" onclick="switchTab('governance')" id="nav-governance" class="nav-btn w-full flex items-center gap-3 px-3.5 py-3 rounded-xl text-right text-sm transition cursor-pointer">
                     <i class="fa-solid fa-clock-rotate-left w-5 text-center"></i><span>7. حوكمة الزمن والتطوير</span></button>
             </div>
@@ -815,6 +815,7 @@ loadScenario(0);
 function fullSession(){ const f=$('session-frame'); if(!f.src) f.src=f.dataset.src; try{ (f.requestFullscreen||f.webkitRequestFullscreen).call(f); }catch(e){ window.open('hissa/','_blank'); } }
 
 switchTab((location.hash||'#overview').slice(1));
+window.addEventListener('hashchange',()=>{ const t=location.hash.slice(1); if(t!==current && TABS.includes(t)) switchTab(t); });
 </script>
 </body>
 </html>
